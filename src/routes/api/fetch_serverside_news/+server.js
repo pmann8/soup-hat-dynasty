@@ -1,49 +1,50 @@
-import parser from 'fast-xml-parser';
+import { XMLParser, XMLValidator } from 'fast-xml-parser';
 import { waitForAll } from '$lib/utils/helperFunctions/multiPromise';
 import { dynasty } from '$lib/utils/helper';
 import { json } from '@sveltejs/kit';
 
-const FF_BALLERS= 'https://thefantasyfootballers.libsyn.com/fantasyfootball';
-const FTN_NEWS= 'https://www.ftnfantasy.com/content/news?type=news&sport=nfl&limit=30';
-const DYNASTY_LEAGUE= 'https://dynastyleaguefootball.com/feed/';
-const DYNASTY_NERDS= 'https://www.dynastynerds.com/feed/';
+const FF_BALLERS = 'https://thefantasyfootballers.libsyn.com/fantasyfootball';
+const FTN_NEWS = 'https://www.ftnfantasy.com/content/news?type=news&sport=nfl&limit=30';
+const DYNASTY_LEAGUE = 'https://dynastyleaguefootball.com/feed/';
+const DYNASTY_NERDS = 'https://www.dynastynerds.com/feed/';
 
 export async function GET() {
 	const articles = [
-        getXMLArticles(FF_BALLERS, processFF),
-        getJSONArticles(FTN_NEWS, processFTN),
+		getXMLArticles(FF_BALLERS, processFF),
+		getJSONArticles(FTN_NEWS, processFTN),
 	];
-	if(dynasty) {
+	if (dynasty) {
 		articles.push(getXMLArticles(DYNASTY_LEAGUE, processDynastyLeague));
 		articles.push(getXMLArticles(DYNASTY_NERDS, processDynastyNerds));
 	}
-    const responses = await waitForAll(...articles).catch((err) => { console.error(err); });
+	const responses = await waitForAll(...articles).catch((err) => { console.error(err); });
 
 	let finalArticles = [];
 
-	for(const response of responses) {
+	for (const response of responses) {
 		finalArticles = [...finalArticles, ...response];
 	}
 
-    return json(finalArticles);
+	return json(finalArticles);
 }
 
-const getXMLArticles = async(url, callback) => {
-    const res = await fetch(url, {compress: true}).catch((err) => { console.error(err); });
-    const text = await res.text().catch((err) => { console.error(err); });
+const getXMLArticles = async (url, callback) => {
+	const res = await fetch(url, { compress: true }).catch((err) => { console.error(err); });
+	const text = await res.text().catch((err) => { console.error(err); });
 
-    let jsonObj;
-    if( parser.validate(text) === true) { //optional (it'll return an object in case it's not valid)
-        jsonObj = parser.parse(text);
-    }
-    
-    return callback(jsonObj.rss.channel.item);
+	let xmlData;
+	if (XMLValidator.validate(text) === true) {
+		const parser = new XMLParser();
+		xmlData = parser.parse(text);
+	}
+
+	return callback(xmlData.rss.channel.item);
 }
 
 const getJSONArticles = async (feed, callback) => {
-	const res = await fetch(feed, {compress: true}).catch((err) => { console.error(err); });
+	const res = await fetch(feed, { compress: true }).catch((err) => { console.error(err); });
 	const data = await res.json().catch((err) => { console.error(err); });
-	
+
 	if (res.ok) {
 		return callback(data);
 	} else {
@@ -53,7 +54,7 @@ const getJSONArticles = async (feed, callback) => {
 
 const processFF = (articles) => {
 	let finalArticles = [];
-	for(const article of articles.slice(0, 5)) {
+	for (const article of articles.slice(0, 5)) {
 		const ts = Date.parse(article.pubDate);
 		const d = new Date(ts);
 		const date = stringDate(d);
@@ -62,7 +63,7 @@ const processFF = (articles) => {
 			title: article.title,
 			article: article.description,
 			link: article.link,
-			author: `FTN Fantasy`,
+			author: `Fantasy Footballers`,
 			ts,
 			date,
 			icon,
@@ -74,9 +75,9 @@ const processFF = (articles) => {
 const processFTN = (rawArticles) => {
 	let finalArticles = [];
 	const items = rawArticles.items;
-	for(const article of items) {
+	for (const article of items) {
 		// only grab important info
-		if(article.priority > 3) continue;
+		if (article.priority > 3) continue;
 		const ts = Date.parse(article.datetime);
 		const d = new Date(ts);
 		const date = stringDate(d);
@@ -96,7 +97,7 @@ const processFTN = (rawArticles) => {
 
 const processDynastyLeague = (articles) => {
 	let finalArticles = [];
-	for(const article of articles) {
+	for (const article of articles) {
 		const ts = Date.parse(article.pubDate);
 		const d = new Date(ts);
 		const date = stringDate(d);
@@ -116,7 +117,7 @@ const processDynastyLeague = (articles) => {
 
 const processDynastyNerds = (articles) => {
 	let finalArticles = [];
-	for(const article of articles) {
+	for (const article of articles) {
 		const ts = Date.parse(article.pubDate);
 		const d = new Date(ts);
 		const date = stringDate(d);
@@ -135,5 +136,5 @@ const processDynastyNerds = (articles) => {
 }
 
 const stringDate = (d) => {
-	return `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()} ${d.getHours()}:${(d.getMinutes() < 10 ? '0' : '') + d.getMinutes()}`;
+	return `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()} ${d.getHours()}:${(d.getMinutes() < 10 ? '0' : '') + d.getMinutes()}`;
 }

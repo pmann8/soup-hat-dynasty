@@ -1,7 +1,6 @@
 <script>
     import { goto } from "$app/navigation";
-    import {  getRosterIDFromManagerID } from '$lib/utils/helperFunctions/universalFunctions';
-    import { getAvatarFromTeamManagers } from '$lib/utils/helperFunctions/universalFunctions';
+    import {  getRosterIDFromManagerID, getTeamNameFromTeamManagers, getAvatarFromTeamManagers } from '$lib/utils/helperFunctions/universalFunctions';
 	import { gotoManager } from '$lib/utils/helper'
 	
     export let viewManager, players, leagueTeamManagers;
@@ -259,7 +258,8 @@
             <img class="rival" src="{getAvatarFromTeamManagers(leagueTeamManagers, viewManager.rival.link, year)}" alt="rival"/>
         </div>
         <div class="infoAnswer">
-			{viewManager.rival.name}
+            {getTeamNameFromTeamManagers(leagueTeamManagers, viewManager.rival.link, year)}
+			<!--{viewManager.rival.name}-->
 		</div>
     </div>
 </div>
