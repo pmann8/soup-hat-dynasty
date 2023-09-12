@@ -323,6 +323,9 @@ const processMatchups = ({matchupWeek, seasonPointsRecord, record, startWeek, ma
 		const matchup = matchups[matchupKey];
 		let home = matchup[0];
 		let away = matchup[1];
+		// if there are no teams or only one, continue
+		if (!away || !home) continue;
+
 		if(matchup[0].fpts < matchup[1].fpts) {
 			home = matchup[1];
 			away = matchup[0];
@@ -344,13 +347,13 @@ const processMatchups = ({matchupWeek, seasonPointsRecord, record, startWeek, ma
 
 		// handle post-season data
 		if(matchupKey.split(":")[0] == "PS") {
-            pSD[home.rosterID].wins = 1;
-            pSD[home.rosterID].fptsFor = home.fpts;
-            pSD[home.rosterID].fptsAgainst = away.fpts;
+			pSD[home.rosterID].wins = 1;
+			pSD[home.rosterID].fptsFor = home.fpts;
+			pSD[home.rosterID].fptsAgainst = away.fpts;
             
-            pSD[away.rosterID].losses = 1;
-            pSD[away.rosterID].fptsFor = away.fpts;
-            pSD[away.rosterID].fptsAgainst = home.fpts;
+			pSD[away.rosterID].losses = 1;
+			pSD[away.rosterID].fptsFor = away.fpts;
+			pSD[away.rosterID].fptsAgainst = home.fpts;
 		}
 	}
 

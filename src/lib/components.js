@@ -15,6 +15,7 @@ import Manager from './Managers/Manager.svelte';
 import AllManagers from './Managers/AllManagers.svelte';
 import PowerRankings from './PowerRankings/index.svelte';
 import HomePost from './BlogPosts/HomePost.svelte';
+import FullPost from './BlogPosts/FullPost.svelte';
 import Posts from './BlogPosts/Posts.svelte';
 import Standings from './Standings/index.svelte';
 import Editor from './Editor/Editor.svelte';
@@ -38,6 +39,7 @@ export {
     PowerRankings,
     HomePost,
     Posts,
+    FullPost,
     Standings,
     Editor,
 };
