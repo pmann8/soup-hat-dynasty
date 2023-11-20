@@ -94,8 +94,8 @@
     ]
 
     const performanceOrderTwo = [
-        {field: "fptsFor", label: "Fantasy Points For", unit: "fpts"},
-        {field: "fptsAgainst", label: "Fantasy Points Against", unit: "fpts against"},
+        {field: "fptsFor", label: "Points For", unit: "fpts"},
+        {field: "fptsAgainst", label: "Points Against", unit: "fpts against"},
     ]
 
     const playerOneRecords = recordsInfo?.regularSeasonData?.leagueManagerRecords ? recordsInfo.regularSeasonData.leagueManagerRecords[playerOne] : null;
