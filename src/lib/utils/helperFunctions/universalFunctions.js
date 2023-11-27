@@ -204,7 +204,15 @@ export const getAvatarFromTeamManagers = (teamManagers, rosterID, year) => {
     if(!year || year > teamManagers.currentSeason) {
         year = teamManagers.currentSeason;
     }
-    return teamManagers.teamManagersMap[year][rosterID].team.avatar;
+    if (teamManagers.teamManagersMap[year][rosterID] == null) {
+        return {
+            avatar: `https://sleepercdn.com/images/v2/icons/player_default.webp`,
+            name: 'Unknown Team',
+        }
+    }
+    else {
+        return teamManagers.teamManagersMap[year][rosterID].team.avatar;
+    }
 }
 
 export const getTeamNameFromTeamManagers = (teamManagers, rosterID, year) => {
