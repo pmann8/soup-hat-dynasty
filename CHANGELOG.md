@@ -2,22 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-## [2.3.5] - 2024-04-27
-
-### Fixed
-
-- Resources page wouldn't load. [(issue #296)](https://github.com/nmelhado/league-page/issues/296)
-- Sleeper now include median match in standings API, so we ended up double counting. Removed the median match logic [(issue #272)](https://github.com/nmelhado/league-page/issues/296) and [(issue #276)](https://github.com/nmelhado/league-page/issues/276)
-- In playoff matches, the bye weeks had a non-valid manager ID which broke due to poor error handling [(issue #289)](https://github.com/nmelhado/league-page/issues/289)
-- Vercel was weirdly trying to force node 20 despite the fact that Vercel doesn't support node 20 [(issue #294)](https://github.com/nmelhado/league-page/issues/294)
-- gotoManagers wasn't working on the Records page because of a bad year value being passed in. Made gotoManagers more error tolerant and also fixed the bug
-
-## [2.3.4] - 2023-09-13
-
-### Fixed
-
-- Users were unable to add comments. [(issue #268)](https://github.com/nmelhado/league-page/issues/268)
-
 ## [2.3.3] - 2023-09-08
 
 ### Fixed
