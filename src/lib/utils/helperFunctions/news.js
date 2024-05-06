@@ -22,7 +22,6 @@ export const getNews = async (servFetch, bypass = false) => {
 	}
 
 	const [serverRes, reddit] = await waitForAll(...newsSources).catch((err) => { console.error(err); });
-
 	const serverData = await serverRes.json().catch((err) => { console.error(err); });
 
 	const articles = [...reddit, ...serverData].sort((a, b) => (a.ts < b.ts) ? 1 : -1);
@@ -33,12 +32,14 @@ export const getNews = async (servFetch, bypass = false) => {
 
 const getFeed = async (feed, callback) => {
 	const res = await fetch(feed, { compress: true }).catch((err) => { console.error(err); });
+
 	const data = await res.json().catch((err) => { console.error(err); });
 
 	if (res.ok && data && data.data) {
 		return callback(data.data);
 	} else {
-		throw new Error(data);
+		console.error(data);
+		return [];
 	}
 }
 
