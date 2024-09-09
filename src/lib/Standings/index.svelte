@@ -71,10 +71,16 @@
         margin: 1.5em 0 2em;
     }
 
+    .standingsTable::-webkit-scrollbar { 
+        display: none; 
+    }
+
     .standingsTable {
         max-width: 100%;
         overflow-x: scroll;
         margin: 0.5em 0 5em;
+  	    -ms-overflow-style: none;  /* IE and Edge */
+  	    scrollbar-width: none;     /* Firefox */
     }
 </style>
 
