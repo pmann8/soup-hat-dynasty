@@ -42,7 +42,7 @@ export const getLeagueStandings = async () => {
         }
     }
 
-    if (nflState.season_type == 'regular' && nflState.display_week == '1') {
+    if (nflState.season_type == 'regular' && nflState.week == '1') {
         for (const rosterID in rosters) {
             standings[rosterID].fpts = 0
             standings[rosterID].fptsAgainst = 0
