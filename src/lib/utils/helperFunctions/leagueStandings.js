@@ -38,6 +38,8 @@ export const getLeagueStandings = async () => {
             ties: roster.settings.ties,
             fpts: round(roster.settings.fpts + (roster.settings.fpts_decimal / 100)),
             fptsAgainst: round(roster.settings.fpts_against + (roster.settings.fpts_against_decimal / 100)),
+            maxFpts: round(roster.settings.ppts + (roster.settings.ppts_decimal / 100)),
+            ptsDiff: round(round(roster.settings.fpts + (roster.settings.fpts_decimal / 100)) - round(roster.settings.fpts_against + (roster.settings.fpts_against_decimal / 100))),
             streak: roster.metadata?.streak || 0,
         }
     }

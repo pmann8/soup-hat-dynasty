@@ -10,10 +10,10 @@
 
     // Least important to most important (i.e. the most important [usually wins] goes last)
     // Edit this to match your leagues settings
-    const sortOrder = ["fptsAgainst", "fpts", "ties", "wins"];
+    const sortOrder = ["maxFpts", "fptsAgainst", "fpts", "ties", "wins"];
 
     // Column order from left to right
-    const columnOrder = [{name: "Wins", field: "wins"}, {name: "Ties", field: "ties"}, {name: "Loses", field: "losses"}, {name: "Points For", field: "fpts"}, {name: "Points Against", field: "fptsAgainst"}, {name: "Win Streak", field: "streak"}]
+    const columnOrder = [{name: "Wins", field: "wins"}, {name: "Ties", field: "ties"}, {name: "Loses", field: "losses"}, {name: "Points For", field: "fpts"}, {name: "Points Against", field: "fptsAgainst"}, {name: "Points Difference", field: "ptsDiff"}, {name: "Max Points For", field: "maxFpts"}, {name: "Win Streak", field: "streak"}]
 
     let loading = true;
     let preseason = false;
