@@ -87,9 +87,9 @@
 		{
 			for (var k = 0; k < transaction[i].moves.length; k++)
 			{	
-				for (var j = 0; j <transaction[i].moves[k].length; j++)
+				for (var j = 0; j < transaction[i].moves[k].length; j++)
 				{
-					if (transaction[i].moves[k][j].player) {
+					if (transaction[i].moves[k][j] !== null && transaction[i].moves[k][j].player) {
 						playersTraded.push(transaction[i].moves[k][j].player)
 					}
 				}

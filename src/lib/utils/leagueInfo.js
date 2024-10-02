@@ -7,9 +7,7 @@ export const enableBlog = false; // requires VITE_CONTENTFUL_ACCESS_TOKEN and VI
 export const enableEditor = false; // true to enable manager editor, false to disable manager editor on indiviual managers pages
 
 /*   STEP 2   */
-export const homepageText = `
-  <p>Soup Hat Dynasty League</p>
-`;
+export const homepageText = ``;
 
 /*   STEP 3   */
 /*
