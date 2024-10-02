@@ -127,7 +127,7 @@
 </style>
 
 <div class="barParent">
-    <img alt="team avatar" on:click={() => gotoManager({year, leagueTeamManagers, managerID, rosterID})} style="border-color: var({color});" class="teamAvatar clickable" src="{user ? `https://sleepercdn.com/avatars/thumbs/${user.avatar}` : getAvatarFromTeamManagers(leagueTeamManagers, rosterID, year)}" />
+    <img alt="team avatar" on:click={() => gotoManager({year, leagueTeamManagers, managerID, rosterID})} style="border-color: {color};" class="teamAvatar clickable" src="{user ? `https://sleepercdn.com/avatars/thumbs/${user.avatar}` : getAvatarFromTeamManagers(leagueTeamManagers, rosterID, year)}" />
     <span class="managerName clickable" on:click={() => gotoManager({year, leagueTeamManagers, managerID, rosterID})}>
         {#if user}
             {user.display_name}
@@ -139,13 +139,13 @@
         <div class="statBars">
             <div class="leftSpacer" />
             <div class="bars">
-                <div class="bar{!secondStat  ? '' : ' opacity'}" style="background-color: var({color}); width: {(stat - xMin) / (xMax - xMin == 0 ? 1 : (xMax - xMin)) * 100}%;">
+                <div class="bar{!secondStat  ? '' : ' opacity'}" style="background-color: {color}; width: {(stat - xMin) / (xMax - xMin == 0 ? 1 : (xMax - xMin)) * 100}%;">
                     {#if !secondStat}
                         <span class="barLabel">{stat}{label}</span>
                     {/if}
                 </div>
                 {#if secondStat}
-                    <div class="bar secondBar" style="background-color: var({color}); width: {(secondStat - xMin) / (xMax - xMin == 0 ? 1 : (xMax - xMin)) * 100}%;">
+                    <div class="bar secondBar" style="background-color: {color}; width: {(secondStat - xMin) / (xMax - xMin == 0 ? 1 : (xMax - xMin)) * 100}%;">
                         <span class="barLabel">{secondStat}&nbsp;&nbsp;of&nbsp;&nbsp;{stat}&nbsp;&nbsp;({round(secondStat/stat*100)}%)</span>
                     </div>
                 {/if}
