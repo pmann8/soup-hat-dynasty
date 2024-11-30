@@ -7,6 +7,11 @@ export const tabs = [
         dest: '/',
     },
     {
+        icon: 'leaderboard',
+        label: 'Standings',
+        dest: '/standings',
+    },
+    {
         icon: 'sports',
         label: 'Matchups',
         dest: '/matchups',
@@ -27,24 +32,19 @@ export const tabs = [
         nest: true,
         children: [
             {
-                icon: 'storage',
-                label: 'Rosters',
-                dest: '/rosters',
-            },
-            {
                 icon: 'groups',
                 label: 'Managers',
                 dest: '/managers',
             },
             {
+                icon: 'storage',
+                label: 'Rosters',
+                dest: '/rosters',
+            },
+            {
                 icon: 'local_fire_department',
                 label: 'Rivalry',
                 dest: '/rivalry',
-            },
-            {
-                icon: 'leaderboard',
-                label: 'Standings',
-                dest: '/standings',
             },
             {
                 icon: 'view_comfy',
@@ -61,11 +61,11 @@ export const tabs = [
                 label: 'Records',
                 dest: '/records',
             },
-            {
-                icon: 'history_edu',
-                label: 'Constitution',
-                dest: '/constitution',
-            },
+            //{
+            //    icon: 'history_edu',
+            //    label: 'Constitution',
+            //    dest: '/constitution',
+            //},
             {
                 icon: 'sports_football',
                 label: 'Go to Sleeper',
