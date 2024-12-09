@@ -205,6 +205,9 @@ export const getTeamData = (users, ownerID) => {
 }
 
 export const getAvatarFromTeamManagers = (teamManagers, rosterID, year) => {
+    if (rosterID == null) {
+        return QUESTION;
+    }
     if (!year || year > teamManagers.currentSeason) {
         year = teamManagers.currentSeason;
     }
