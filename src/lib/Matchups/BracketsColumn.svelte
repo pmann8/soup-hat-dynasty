@@ -1,6 +1,6 @@
 <script>
     import { round } from "$lib/utils/helper";
-	import { getAvatarFromTeamManagers, getTeamNameFromTeamManagers } from "$lib/utils/helperFunctions/universalFunctions";
+    import { getAvatarFromTeamManagers, getTeamNameFromTeamManagers } from "$lib/utils/helperFunctions/universalFunctions";
 
     export let leagueTeamManagers, players, matchCol, playoffsStart, ix, playoffLength, consolation = false, losers = false, numRosters, consolationNum, selected;
 
@@ -22,14 +22,14 @@
                 case 3:
                     label = 'Quarterfinals'
                     break;
-                case 3:
+                case 4:
                     label = 'Eighth-Finals'
-                    break;
-            
+                    break;            
                 default:
                     break;
             }
-        } else {
+        } 
+        else {
             // If it's not a consolation match the only single matchup is the final
             if(!consolation) {
                 if(losers) {
@@ -69,6 +69,7 @@
 
     let anchors = {};
     let drawBracket = false;
+
     const setDrawBracket = (col) => {
         if(col.length % 2 == 0) {
             drawBracket = true;
@@ -78,7 +79,8 @@
     }
     $: setDrawBracket(matchCol)
 
-    const duos = matchCol.length / 2;
+    const duos = matchCol.length / 2 + 1;
+
     for(let i = 0; i < duos; i++) {
         anchors[i] = {
             t: null,
@@ -264,35 +266,35 @@
 
     /* SVG styling */
 
-	.lineParent {
+    .lineParent {
         top: 0;
         left: 0;
         position: absolute;
-		overflow: visible;
-		width: 1px;
-		height: 1px;
-		pointer-events: none;
-	}
+        overflow: visible;
+        width: 1px;
+        height: 1px;
+        pointer-events: none;
+    }
 
-	.line{
+    .line{
         top: 0;
         left: 0;
-		position: absolute;
-		z-index: 1;
-	}
+        position: absolute;
+        z-index: 1;
+    }
 
     /* media queries */
-	@media (max-width: 1000px) {
+    @media (max-width: 1000px) {
         .match {
             width: 220px;
         }
-	}
+    }
 
-	@media (max-width: 800px) {
+    @media (max-width: 800px) {
         .match {
             width: 180px;
         }
-	}
+    }
 
     @media (max-width: 610px) {
         .match {
