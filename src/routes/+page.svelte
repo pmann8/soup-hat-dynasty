@@ -1,12 +1,25 @@
 <script>
+    import { onMount } from 'svelte';
 	import LinearProgress from '@smui/linear-progress';
-	import { getNflState, leagueName, getAwards, getLeagueTeamManagers, homepageText, managers, gotoManager, enableBlog, waitForAll } from '$lib/utils/helper';
-	import { Transactions, PowerRankings, HomePost} from '$lib/components';
+	import { getNflState, leagueName, getAwards, getLeagueTeamManagers, homepageText, managers, gotoManager, enableBlog, waitForAll, getUpcomingDraft, getPreviousDrafts, loadPlayers} from '$lib/utils/helper';
+	import { Transactions, PowerRankings, HomePost, Drafts} from '$lib/components';
 	import { getAvatarFromTeamManagers, getTeamFromTeamManagers } from '$lib/utils/helperFunctions/universalFunctions';
 
+    let playersData;
+
+    const refreshPlayers = async () => {
+        playersData = await loadPlayers(null, true);
+    }
+
+    const upcomingDraftData = getUpcomingDraft();
+    const previousDraftsData = getPreviousDrafts();
     const nflState = getNflState();
     const podiumsData = getAwards();
     const leagueTeamManagersData = getLeagueTeamManagers();
+
+    onMount(() => {
+        refreshPlayers();
+    });
 </script>
 
 <style>
@@ -147,7 +160,18 @@
                 <HomePost />
             {/if}
         </div>
-        <PowerRankings />
+        {#await nflState}
+        <div class="center">Retrieving NFL state...</div>
+                <LinearProgress indeterminate />
+        {:then nflStateData}
+            {#if nflStateData.season_type == 'off'}
+			    <Drafts {upcomingDraftData} {previousDraftsData} {leagueTeamManagersData} {playersData} false />
+		    {:else if nflStateData.season_type != 'pre' && nflStateData.season_type == 'post'}
+                <PowerRankings />
+            {/if}
+        {:catch error}
+                <div class="center">Something went wrong: {error.message}</div>
+        {/await}
     </div>
 
     <div class="leagueData">

@@ -11,5 +11,6 @@ export async function load({ fetch }) {
         previousDraftsData,
         leagueTeamManagersData,
         playersData,
+        includePreviousYears: true,
     };
 }

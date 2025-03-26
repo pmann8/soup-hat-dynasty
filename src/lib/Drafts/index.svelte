@@ -3,7 +3,7 @@
     import LinearProgress from '@smui/linear-progress';
     import Draft from './Draft.svelte'; 
 
-    export let upcomingDraftData, previousDraftsData, leagueTeamManagersData, playersData;
+    export let upcomingDraftData, previousDraftsData, leagueTeamManagersData, playersData, includePreviousYears;
 </script>
 
 <style>
@@ -38,26 +38,27 @@
 	<p>Something went wrong: {error.message}</p>
 {/await}
 
-
-{#await waitForAll(previousDraftsData, leagueTeamManagersData, playersData) }
-	<hr />
-	<h4>Previous Drafts</h4>
-	<div class="loading">
-		<p>Retrieving previous drafts...</p>
-		<br />
-		<LinearProgress indeterminate />
-	</div>
-{:then [previousDrafts, leagueTeamManagers, {players}] }
-	<!-- Don't display anything unless there are previous drafts -->
-	{#if previousDrafts.length}
+{#if includePreviousYears}
+	{#await waitForAll(previousDraftsData, leagueTeamManagersData, playersData) }
 		<hr />
 		<h4>Previous Drafts</h4>
-		{#each previousDrafts as previousDraft}
-			<h6>{previousDraft.year} Draft</h6>
-			<Draft draftData={previousDraft} previous={true} {leagueTeamManagers} year={previousDraft.year} {players} />
-		{/each}
-	{/if}
-{:catch error}
-	<!-- promise was rejected -->
-	<p>Something went wrong: {error.message}</p>
-{/await}
+		<div class="loading">
+			<p>Retrieving previous drafts...</p>
+			<br />
+			<LinearProgress indeterminate />
+		</div>
+	{:then [previousDrafts, leagueTeamManagers, {players}] }
+		<!-- Don't display anything unless there are previous drafts -->
+		{#if previousDrafts.length}
+			<hr />
+			<h4>Previous Drafts</h4>
+			{#each previousDrafts as previousDraft}
+				<h6>{previousDraft.year} Draft</h6>
+				<Draft draftData={previousDraft} previous={includePreviousYears} {leagueTeamManagers} year={previousDraft.year} {players} />
+			{/each}
+		{/if}
+	{:catch error}
+		<!-- promise was rejected -->
+		<p>Something went wrong: {error.message}</p>
+	{/await}
+{/if }
