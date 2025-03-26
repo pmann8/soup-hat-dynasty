@@ -284,6 +284,6 @@
     <p>A ⅔ majority vote is required in order to raise league dues. In the event that a manager is no longer financially comfortable with the buying, finding a co-manager to split the cost is recommended.</p>
 
 	<!-- svelte-ignore a11y-invalid-attribute -->
-	<a class="backToTop" href="#" onclick="document.body.scrollTop=0;document.documentElement.scrollTop=0;event.preventDefault()">Back to the top</a>
+	<a> class="backToTop" href="#" onclick="document.body.scrollTop=0;document.documentElement.scrollTop=0;event.preventDefault()">Back to the top</a>
 
 </div>
