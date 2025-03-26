@@ -250,7 +250,7 @@
         </div>
     {/if}
     <!-- Rival -->
-    <div class="infoSlot infoRival" on:click={() => gotoManager({year, leagueTeamManagers, rosterID: viewManager.rival.link})}>
+    <div class="infoSlot infoRival" onclick={() => gotoManager({year, leagueTeamManagers, rosterID: viewManager.rival.link})}>
         <div class="infoLabel">
             Rival
         </div>

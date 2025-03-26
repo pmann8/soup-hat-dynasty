@@ -262,7 +262,7 @@
 		<Head> <!-- Team name  -->
 			<Row>
 				<Cell colspan=4 class="r_{division} clickable">
-					<h3 on:click={() => gotoManager({leagueTeamManagers, rosterID: roster.roster_id})}>
+					<h3 onclick={() => gotoManager({leagueTeamManagers, rosterID: roster.roster_id})}>
 						<img alt="team avatar" class="teamAvatar" src="{team ? team.avatar : 'https://sleepercdn.com/images/v2/icons/player_default.webp'}" />
 						{team?.name ? team.name : 'No Manager'}
 					</h3>
@@ -280,7 +280,7 @@
 			{#each finalStarters as starter}
 				<RosterRow player={starter} />
 			{/each}
-			<Row class="interactive" on:click={toggleSelected}>
+			<Row class="interactive" onclick={toggleSelected}>
 				<Cell colspan=4 class="{division}"><h5><Icon class="material-icons icon">king_bed</Icon> Bench <span class="italic">({status})</span></h5></Cell>
 			</Row>
 		</Body>
@@ -302,7 +302,7 @@
 						<RosterRow player={ir} />
 					{/each}
 				{/if}
-				<Row class="interactive" on:click={toggleSelected}>
+				<Row class="interactive" onclick={toggleSelected}>
 					<Cell colspan=4 class="{division}"><h5><Icon class="material-icons icon">close_fullscreen</Icon>Close Bench</h5></Cell>
 				</Row>
 			</Body>

@@ -5,21 +5,25 @@ export const tabs = [
         icon: 'home',
         label: 'Home',
         dest: '/',
+        key: 'home',
     },
     {
         icon: 'leaderboard',
         label: 'Standings',
         dest: '/standings',
+        key: 'standings',
     },
     {
         icon: 'sports',
         label: 'Matchups',
         dest: '/matchups',
+        key: 'matchups',
     },
     {
         icon: 'swap_horiz',
         label: 'Trades & Waivers',
         dest: '/transactions',
+        key: 'transactions',
     },
     //{
     //    icon: 'article',
@@ -30,6 +34,7 @@ export const tabs = [
         icon: 'view_comfy',
         label: 'League Info',
         nest: true,
+        key: 'league_info',
         children: [
             {
                 icon: 'groups',
@@ -77,5 +82,6 @@ export const tabs = [
         icon: 'lightbulb',
         label: 'Resources',
         dest: '/resources',
+        key: 'resources',
     },
 ];

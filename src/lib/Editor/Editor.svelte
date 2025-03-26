@@ -322,10 +322,10 @@
 	</div>
 </div>
 <div class="submitBtn">
-	<Button on:click={() => gotoManager({year, leagueTeamManagers, managerID: leagueTeamManagers.users[managerDropdownValue].user_id})} variant="unelevated">
+	<Button onclick={() => gotoManager({year, leagueTeamManagers, managerID: leagueTeamManagers.users[managerDropdownValue].user_id})} variant="unelevated">
 		<Label>Submit</Label>
 	</Button>
-	<Button on:click={clearData} variant="unelevated">
+	<Button onclick={clearData} variant="unelevated">
 		<Label>Clear</Label>
 	</Button>
 </div>
