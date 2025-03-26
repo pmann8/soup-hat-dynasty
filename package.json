@@ -57,6 +57,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@smui/slider": "^8.0.0-beta.3",
     "@vercel/analytics": "^1.5.0",
     "contentful": "^10.6.7",
     "contentful-management": "^10.46.4",
