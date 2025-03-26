@@ -1,6 +1,6 @@
 {
   "name": "league-page",
-  "version": "2.4.4",
+  "version": "2.5.0",
   "homepage": "https://github.com/pmann8/soup-hat-dynasty",
   "repository": {
     "type": "git",
@@ -82,6 +82,7 @@
     "@smui/textfield": "8.0.0-beta.3",
     "@sveltejs/adapter-vercel": "^5.6.3",
     "@sveltejs/kit": "^2.20.2",
+    "@vercel/analytics": "^1.5.0",
     "contentful": "^11.5.11",
     "contentful-management": "^11.48.3",
     "cookie": "^1.0.2",
