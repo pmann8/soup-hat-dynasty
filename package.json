@@ -1,10 +1,10 @@
 {
   "name": "league-page",
   "version": "2.5.1",
-  "homepage": "https://github.com/pmann8/soup-hat-dynasty",
+  "homepage": "https://github.com/nmelhado/league-page",
   "repository": {
     "type": "git",
-    "url": "git://github.com/pmann8/soup-hat-dynasty.git"
+    "url": "git://github.com/nmelhado/league-page.git"
   },
   "author": {
     "name": "Nicholas Melhado",
@@ -55,8 +55,9 @@
     "lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "prettier --write --plugin-search-dir=. ."
   },
+  "type": "module",
   "dependencies": {
-    "@vercel/analytics": "^1.4.1",
+    "@vercel/analytics": "^1.5.0",
     "contentful": "^10.6.7",
     "contentful-management": "^10.46.4",
     "cookie": "^0.7.0",
