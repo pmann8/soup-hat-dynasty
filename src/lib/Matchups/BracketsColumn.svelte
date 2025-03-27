@@ -77,7 +77,6 @@
         } else {
             drawBracket = false;
         }
-        console.log(losers ? "losers": "winners", "drawBracket:", drawBracket);
     }
     $: setDrawBracket(matchCol)
 
@@ -164,7 +163,6 @@
             anchors[key].xMiddle = anchors[key].xLeft + (colWidth / 2);
             anchors[key].xRight = anchors[key].xLeft + colWidth;
         }
-        console.log(losers ? "losers": "winners", "anchors:", anchors);
     }
 
     const getOffset = (value, offset) => {
