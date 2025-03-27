@@ -1,4 +1,5 @@
 <script>
+    import { onMount } from "svelte";
     import { round } from "$lib/utils/helper";
     import { getAvatarFromTeamManagers, getTeamNameFromTeamManagers } from "$lib/utils/helperFunctions/universalFunctions";
 
@@ -76,6 +77,7 @@
         } else {
             drawBracket = false;
         }
+        console.log(losers ? "losers": "winners", "drawBracket:", drawBracket);
     }
     $: setDrawBracket(matchCol)
 
@@ -162,6 +164,7 @@
             anchors[key].xMiddle = anchors[key].xLeft + (colWidth / 2);
             anchors[key].xRight = anchors[key].xLeft + colWidth;
         }
+        console.log(losers ? "losers": "winners", "anchors:", anchors);
     }
 
     $: resize(innerWidth);
@@ -173,6 +176,9 @@
         selected = m;
     }
 
+    onMount(() => {
+        resize();
+    });
 </script>
 
 <svelte:window bind:innerWidth={innerWidth} />
