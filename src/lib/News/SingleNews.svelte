@@ -14,6 +14,10 @@
         margin: 1em 0 0.5em;
     }
 
+    :global(.article) {
+       background-color: var(--lightBlue) !important;
+    }
+
     .title-link {
         font-weight: 500;
         color: #bbb;
