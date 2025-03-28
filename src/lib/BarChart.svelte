@@ -33,11 +33,11 @@
 
 <style>
     .chartWrapper {
-		background-color: var(--fff);
+		background-color: var(--lightBlue);
         padding: 1em 0 0.5em;
         margin: 0 auto;
         max-width: 950px;
-        box-shadow: 0px 3px 3px -2px var(--boxShadowOne), 0px 3px 4px 0px var(--boxShadowTwo), 0px 1px 8px 0px var(--boxShadowThree);
+        border-radius: 5px;
     }
 
     .barChart {
@@ -57,6 +57,10 @@
     .buttonHolderG {
         text-align: center;
         margin: 1em 0 2em;
+    }
+
+    :global(.buttonHolderG .selectionButtons) {
+        margin: 0.2em;
     }
 
     /* Start button resizing */
@@ -114,7 +118,7 @@
 
 {#if graphs.length > 1}
     <div class="buttonHolderG">
-        <Group variant="outlined">
+        <div class="buttons">
             {#each graphs as graph, ix}
                 {#if ix < 4}
                     <Button class="selectionButtons" onclick={() => curGraph = ix} variant="{curGraph == ix ? "raised" : "outlined"}">
@@ -122,9 +126,9 @@
                     </Button>
                 {/if}
             {/each}
-        </Group>
+        </div>
         <br />
-        <Group variant="outlined">
+        <div class="buttons">
             {#each graphs as graph, ix}
                 {#if ix > 3}
                     <Button class="selectionButtons" onclick={() => curGraph = ix} variant="{curGraph == ix ? "raised" : "outlined"}">
@@ -132,6 +136,6 @@
                     </Button>
                 {/if}
             {/each}
-        </Group>
+        </div>
     </div>
 {/if}

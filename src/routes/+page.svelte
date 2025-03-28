@@ -29,6 +29,7 @@
         position: relative;
         overflow-y: hidden;
         z-index: 1;
+        background-color: var(--midBlue);
     }
 
     #main {
@@ -36,12 +37,16 @@
         min-width: 320px;
         margin: 0 auto;
         padding: 60px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .text {
         padding: 0 30px;
         max-width: 620px;
         margin: 0 auto;
+        text-align: center;
     }
 
     .leagueData {
@@ -51,9 +56,9 @@
         min-width: 470px;
         max-width: 470px;
         min-height: 100%;
-		background-color: var(--ebebeb);
-        border-left: var(--eee);
-		box-shadow: inset 8px 0px 6px -6px rgb(0 0 0 / 24%);
+        background-color: var(--lightBlue);
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
     }
 
     @media (max-width: 950px) {
@@ -72,6 +77,7 @@
         display: block;
         width: 95%;
         margin: 10px auto;
+        background-color: var(--lightBlue);
     }
 
     .center {
@@ -80,22 +86,23 @@
 
     h3 {
         text-align: center;
+        color: #bbb;
     }
 
     .homeBanner {
-        background-color: var(--blueOne);
-        color: #fff;
+        background-color: var(--darkBlue);
         padding: 0.5em 0;
         font-weight: 500;
         font-size: 1.5em;
+		color: #bbb;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
     }
 
     /* champ styling */
     #currentChamp {
         padding: 25px 0;
-		background-color: var(--f3f3f3);
-        box-shadow: 5px 0 8px var(--champShadow);
-        border-left: 1px solid var(--ddd);
+		background-color: var(--lightBlue);
     }
 
     #champ {
@@ -131,6 +138,7 @@
         font-size: 1.8em;
         margin: 10px;
         font-style: italic;
+		color: #bbb;
     }
 
     .label {
@@ -140,6 +148,7 @@
         font-size: 1.7em;
         margin: 6px auto 10px;
         cursor: pointer;
+		color: #bbb;
     }
 
 	:global(.curOwner) {
@@ -147,6 +156,116 @@
 		color: #bbb;
 		font-style: italic;
 	}
+
+    :global(#home .transactions .waiverTransaction .name) {
+        position: relative;
+        color: #bbb;
+    }
+
+    :global(#home .transactions .waiverTransaction .core) {
+        display: flex;
+        flex-direction: column;
+        border-radius: 0px 10px 10px 40px;
+        border-left: 2px solid var(--darkBlue);
+        border-bottom: none;
+        background-color: var(--midBlue);
+    }
+
+    :global(#home .transactions .waiverTransaction .avatar) {
+        position: absolute;
+        left: 0px;
+        top: 6px;
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        border: 2px solid var(--darkBlue);
+        background-color: var(--darkBlue);
+    }
+
+    :global(#home .transactions .waiverTransaction .ownerName) {
+        display: inline-block;
+        border-bottom: 2px solid var(--darkBlue);
+        margin: 0 0 0 22px;
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+
+    :global(#home .transactions .waiverTransaction .playerName) {
+        font-size: 0.8em;
+        line-height: 1em;
+        text-align: center;
+        color: #bbb;
+    }
+
+    :global(#home .transactions .waiverTransaction .playerInfo) {
+        font-size: 0.6em;
+        color: #bbb;
+        line-height: 1em;
+    }
+
+    :global(#home .transactions .waiverTransaction .date) {
+        color: #bbb;
+        font-style: italic;
+        font-size: 0.7em;
+        text-align: center;
+        margin-top: 0.7em;
+    }
+
+    :global(#home .transactions .tradeTransaction .name) {
+        position: relative;
+        color: #bbb;
+    }
+
+    :global(#home .transactions .tradeTransaction .avatar) {
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        border: 2px solid var(--darkBlue);
+        background-color: var(--darkBlue);
+    }
+
+    :global(#home .transactions .tradeTransaction .date) {
+        color: var(--g999);
+        font-style: italic;
+        font-size: 0.7em;
+        text-align: center;
+        padding: 0.7em 0 1em;
+        background-color: var(--midBlue);
+        border-radius: 0 0 10px 40px;
+        border-left: 2px solid var(--darkBlue);
+        border-right: none;
+        margin-bottom: 3em;
+    }
+
+    :global(#home .transactions .tradeTransaction tbody) {
+        background-color: var(--midBlue);
+        border-top: none;
+        border-left: none;
+        border-right: none;
+    }
+
+    :global(.transactions table tbody tr:first-child td:first-child) {
+        border-top-left-radius: 10px;
+        border-left: 2px solid var(--darkBlue);
+        border-top: 2px solid var(--darkBlue);
+        overflow: hidden; /* Ensure content respects the border-radius */
+    }
+
+    :global(.transactions table tbody tr:first-child td:last-child) {
+        border-top-right-radius: 10px;
+        border-top: 2px solid var(--darkBlue);
+        overflow: hidden; /* Ensure content respects the border-radius */
+    }
+
+    :global(.transactions table tbody tr:not(:first-child):not(:last-child) td:first-child) {
+        border-left: 2px solid var(--darkBlue);
+        overflow: hidden; /* Ensure content respects the border-radius */
+    }
+
+    :global(.transactions table tbody tr:last-child td:first-child) {
+        border-left: 2px solid var(--darkBlue);
+        overflow: hidden; /* Ensure content respects the border-radius */
+    }
 </style>
 
 <div id="home">

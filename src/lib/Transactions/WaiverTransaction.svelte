@@ -23,16 +23,16 @@
     
     .name {
         position: relative;
+        color: #bbb;
     }
 
     .core {
         display: flex;
         flex-direction: column;
-        border-radius: 0 0 0 40px;
-        border: 1px solid var(--ddd);
-        border-left: 2px solid var(--blueTwo);
+        border-radius: 0px 10px 10px 40px;
+        border-left: 2px solid var(--darkBlue);
         border-bottom: none;
-        background-color: var(--fff);
+        background-color: var(--lightBlue);
     }
 
     .avatarAndDetails {
@@ -49,13 +49,13 @@
         border-radius: 50%;
         height: 40px;
         width: 40px;
-        border: 2px solid var(--blueTwo);
-        background-color: var(--fff);
+        border: 2px solid var(--darkBlue);
+        background-color: var(--darkBlue);
     }
 
     .ownerName {
         display: inline-block;
-        border-bottom: 2px solid var(--blueTwo);
+        border-bottom: 2px solid var(--darkBlue);
         margin: 0 0 0 22px;
         padding-right: 30px;
         padding-left: 30px;
@@ -98,12 +98,13 @@
     .playerName {
         font-size: 0.8em;
         line-height: 1em;
-        text-align: center;
+        text-align: center;        
+        color: #bbb;
     }
 
     .playerInfo {
         font-size: 0.6em;
-        color: var(--g555);
+        color: #bbb;
         line-height: 1em;
     }
 
@@ -135,7 +136,7 @@
     }
 
     .date {
-        color: var(--g999);
+        color: #bbb;
         font-style: italic;
         font-size: 0.7em;
         text-align: center;

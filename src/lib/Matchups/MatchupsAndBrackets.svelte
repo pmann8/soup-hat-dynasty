@@ -1,14 +1,13 @@
-
 <script>
-	import LinearProgress from '@smui/linear-progress';
-	import MatchupWeeks from './MatchupWeeks.svelte';
-	import Brackets from './Brackets.svelte';
+    import LinearProgress from '@smui/linear-progress';
+    import MatchupWeeks from './MatchupWeeks.svelte';
+    import Brackets from './Brackets.svelte';
     import Button, { Group, Label } from '@smui/button';
     import { goto } from '$app/navigation';
     import { onMount } from 'svelte';
     import { loadPlayers } from '$lib/utils/helper';
 
-	export let queryWeek, leagueTeamManagersData, matchupsData, bracketsData, playersData;
+    export let queryWeek, leagueTeamManagersData, matchupsData, bracketsData, playersData;
 
     let players, matchupWeeks, year, week, regularSeasonLength, brackets, leagueTeamManagers;
 
@@ -62,8 +61,6 @@
     }
 </style>
 
-
-
 {#if loading}
     <!-- promise is pending -->
     <div class="message">
@@ -73,7 +70,7 @@
 {:else}
     {#if matchupWeeks.length}
         <div class="buttonHolder">
-            <Group variant="outlined">
+            <div class="buttons">
                 <!-- Regular Season -->
                 <Button class="selectionButtons" onclick={() => changeSelection('regular')} variant="{selection == 'regular' ? "raised" : "outlined"}">
                     <Label>Regular Season</Label>
@@ -82,9 +79,10 @@
                 <Button class="selectionButtons" onclick={() => changeSelection('champions')} variant="{selection == 'champions' || selection == 'losers' ? "raised" : "outlined"}">
                     <Label>Playoffs</Label>
                 </Button>
-            </Group>
-            {#if selection == 'champions' || selection == 'losers'}
-                <Group variant="outlined">
+            </div>
+            {#if selection == 'champions' || selection == 'losers'}            
+                <br /> 
+                <div class="buttons">
                     <!-- Championship Bracket -->
                     <Button class="selectionButtons" onclick={() => changeSelection('champions')} variant="{selection == 'champions' ? "raised" : "outlined"}">
                         <Label>Champions' Bracket</Label>
@@ -93,7 +91,7 @@
                     <Button class="selectionButtons" onclick={() => changeSelection('losers')} variant="{selection == 'losers' ? "raised" : "outlined"}">
                         <Label>Losers' Bracket</Label>
                     </Button>
-                </Group>
+                </div>
             {/if}
         </div>
         {#if selection == 'regular'}

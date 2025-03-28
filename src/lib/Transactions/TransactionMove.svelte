@@ -20,34 +20,26 @@
     }
 
     const checkL = (cell, ix) => {
-        // if the cell is lower than the origin and destination
-        // or higher than both, it shouldn't have a line
         if(!cell) {
             if(ix < origin && ix < dest) return true;
             if(ix > origin && ix > dest) return true;
             return false;
         }
-        // if this is the origin cell
         if(ix == origin) {
             return dest > origin;
         }
-        // otherwise, it's the destination cell
         return ix < origin;
     }
 
     const checkR = (cell, ix) => {
-        // if the cell is lower than the origin and destination
-        // or higher than both, it shouldn't have a line
         if(!cell) {
             if(ix < origin && ix < dest) return true;
             if(ix > origin && ix > dest) return true;
             return false;
         }
-        // if this is the origin cell
         if(ix == origin) {
             return dest < origin;
         }
-        // otherwise, it's the destination cell
         return ix > origin;
     }
 
@@ -308,3 +300,4 @@
         </td>
 	{/each}
 </tr>
+

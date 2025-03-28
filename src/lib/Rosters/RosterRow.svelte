@@ -30,7 +30,7 @@
 		justify-content: center;
 		border-radius: 8px;
 		width: 46px;
-		height: 32px;
+		height: 32px;		
 	}
 
 	.QB {
@@ -104,10 +104,12 @@
 	:global(.playerCell) {
 		height: 45px !important;
 		overflow-y: hidden !important;
+		color: #bbb;
 	}
 
 	:global(.nameCell) {
     	padding: 0 5px;
+		color: #bbb;
 	}
 
 	:span.nickname {

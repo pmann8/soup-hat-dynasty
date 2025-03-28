@@ -57,12 +57,17 @@
     .matchups {
         margin: 2em 0 6em;
     }
+
     .weekContainer {
         display: flex;
         width: 95%;
         max-width: 600px;
         margin: 0 auto;
         align-items: center;
+    }
+
+    .weekContainer h3 {
+        color: #bbb;
     }
 
     :global(.changeWeek) {

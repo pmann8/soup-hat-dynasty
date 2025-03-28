@@ -93,6 +93,7 @@
         font-size: 2.8em;
         margin: 1em 0 0em;
         line-height: 1em;
+        color: #bbb;
     }
 
     h3 {
@@ -111,7 +112,7 @@
     }
 
     .basicInfo span {
-        color: #888;
+        color: #bbb;
         font-size: 0.9em;
     }
 
@@ -132,11 +133,13 @@
     .bio {
         margin: 2em 1.5em 2em;
         text-indent: 4em;
+        color: #bbb;
     }
 
     .philosophy {
         margin: 2em 1.5em 2em;
         text-indent: 4em;
+        color: #bbb;
     }
 
     .loading {
@@ -149,7 +152,7 @@
     .teamSub {
         font-size: 0.4em;
         line-height: 1em;
-        color: #666;
+        color: #bbb;
     }
 
     .managerNav {

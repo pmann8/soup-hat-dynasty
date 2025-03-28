@@ -13,6 +13,7 @@
 
 	h3 {
 		margin: 2.5em 0 1.5em;
+		color: #bbb;
 	}
 
 	.awards {
@@ -150,10 +151,9 @@
 		justify-content: center;
 		position: absolute;
 		transform: translate(-50%, -50%);
-		padding: 6px 30px;
-		background-color: var(--fff);
-		border: 1px solid var(--bbb);
-        box-shadow: 0px 3px 3px -2px var(--boxShadowOne), 0px 3px 4px 0px var(--boxShadowTwo), 0px 1px 8px 0px var(--boxShadowThree);
+		padding: 6px 6px;
+		background-color: var(--lightBlue);
+		border-radius: 5px;
 	}
 
 	.firstLabel {
@@ -180,10 +180,9 @@
 		justify-content: center;
 		text-align: center;
 		margin: 15px auto 20px;
-		padding: 6px 30px;
-		background-color: var(--fff);
-		border: 1px solid var(--bbb);
-		box-shadow: 0px 3px 3px -2px var(--boxShadowOne), 0px 3px 4px 0px var(--boxShadowTwo), 0px 1px 8px 0px var(--boxShadowThree);
+		padding: 6px 6px;
+		background-color: var(--lightBlue);
+		border-radius: 5px;
 	}
 
 	.division {

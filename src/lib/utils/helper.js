@@ -16,7 +16,7 @@ import { cleanName, round, generateGraph, getTeamFromTeamManagers, gotoManager, 
 import { predictScores } from './helperFunctions/predictOptimalScore';
 import { getBrackets } from './helperFunctions/leagueBrackets';
 import { getBlogPosts, generateParagraph } from './helperFunctions/getBlogPosts';
-import { getLeagueStandings } from './helperFunctions/leagueStandings';
+import { getLeagueStandings, getAllTimeLeagueStandings } from './helperFunctions/leagueStandings';
 
 export {
     enableBlog,
@@ -54,4 +54,5 @@ export {
     parseDate,
     getAvatar,
     getTeamFromTeamManagers,
+    getAllTimeLeagueStandings
 }
