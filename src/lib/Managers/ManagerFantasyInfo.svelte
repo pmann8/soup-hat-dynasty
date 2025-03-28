@@ -23,9 +23,8 @@
         flex-wrap: wrap;
         padding: 0 0 2em;
         margin: 3em 0 4em;
-        border-bottom: 1px solid var(--aaa);
-        border-top: 1px solid var(--aaa);
-        box-shadow: 0 0 8px 4px var(--ccc);
+        box-shadow: 0 0 8px 4px var(--lightBlue);
+        background-color: var(--lightBlue);
     }
 
     .infoSlot {
@@ -40,10 +39,8 @@
         justify-content: center;
         align-items: center;
         border-radius: 100%;
-        border: 1px solid var(--ccc);
         overflow: hidden;
         background-color: var(--fff);
-		transition: box-shadow 0.4s;
     }
 
     .playerIcon {
@@ -51,19 +48,18 @@
     }
 
     .infoLabel {
-        font-size: 0.7em;
-        color: var(--blueOne);
-        font-weight: 700;
+        font-size: 0.8em;
+        color: #bbb;
         margin-bottom: 1em;
         height: 30px;
-        width: 90px;
+        width: auto;
         text-align: center;
         line-height: 1.2em;
     }
 
     .infoAnswer {
         font-size: 0.8em;
-        color: var(--g555);
+        color: #bbb;
         margin-top: 1em;
         width: 90px;
         text-align: center;

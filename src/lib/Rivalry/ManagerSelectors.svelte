@@ -33,6 +33,7 @@
     .vs {
         display: inline-block;
         margin: 1em 0;
+        color: #bbb;
     }
     .container {
         display: inline-block;
@@ -42,30 +43,30 @@
         padding: 0.5em 2em;
         font-size: 1.2em;
         border-radius: 6px;
-        background-color: var(--fff);
+        background-color: var(--darkBlue);
         appearance: none !important;
         -webkit-appearance: none !important;
         -moz-appearance: none !important;
         background-image: url(/dropdown.png);
         background-repeat: no-repeat;
         text-align: center;
-        color: var(--g000);
+        color: #bbb;
     }
     .left {
-        border: 1px solid var(--barChartOne);
+        border: 1px solid var(--darkBlue);
         background-position: 100%;
     }
     select.left:focus {
         outline: none;
-        border: 3px solid var(--barChartOne);
+        border: 3px solid var(--lightBlue);
     }
     .right {
-        border: 1px solid var(--barChartSix);
+        border: 1px solid var(--darkBlue);
         background-position: 0%;
     }
     select.right:focus {
         outline: none;
-        border: 3px solid var(--barChartSix);
+        border: 3px solid var(--lightBlue);
     }
     select option {
         text-align: left;
@@ -78,15 +79,15 @@
         position: absolute;
         transform: translate(0%, -50%);
         top: 50%;
-        background-color: var(--fff);
+        background-color: var(--lightBlue);
     }
     .avatarLeft {
-        border-color: var(--barChartOne);
+        border-color: var(--lightBlue);
         border-right: none;
         left: -18%
     }
     .avatarRight {
-        border-color: var(--barChartSix);
+        border-color: var(--lightBlue);
         border-left: none;
         right: -18%
     }

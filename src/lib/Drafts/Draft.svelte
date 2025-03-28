@@ -55,9 +55,10 @@
 
     :global(.draftBoard) {
         display: block;
-        width: 95%;
+        width: 100%;
         margin: 2em auto 3em;
         overflow-x: auto;
+        border: none !important;
     }
 
 	:global(.draftTeam) {
@@ -71,15 +72,28 @@
         vertical-align: initial;
 	}
 
-	:global(.draftBoard table) {
-        border-collapse: collapse;
+	:global(.draftBoard table) {        
         table-layout: fixed;
         width: 100%;
         min-width: 1200px;
 	}
 
+    :global(.draftBoard th) {
+        border-right: 1px solid #bbb;
+        border-bottom: 1px solid #bbb;
+        height: 2em;
+        font-size: 0.8em;
+        text-align: center;
+        background-color: var(--darkBlue);
+    }
+
+    :global(.draftBoard th:last-of-type) {
+        border-right: none;
+    }
+
     :global(.draftBoard td) {
-        border-right: 1px solid #ddd;
+        border-right: 1px solid #bbb;
+        border-bottom: 1px solid #bbb;
         height: 7em;
         font-size: 0.7em;
     }

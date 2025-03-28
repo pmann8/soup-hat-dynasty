@@ -21,7 +21,7 @@ export const getLeagueStandings = async () => {
     const yearData = leagueData.season;
     const regularSeasonLength = leagueData.settings.playoff_week_start - 1;
     const divisions = leagueData.settings.divisions && leagueData.settings.divisions > 1;
-    const rosters = rostersData.rosters;
+    const rosters = rostersData;
 
     // if the season hasn't started, standings can't be created
     if ((leagueData.status != "in_season" && leagueData.status != "post_season" && leagueData.status != "complete") || nflState.week < 1) {
@@ -136,4 +136,57 @@ const processStandings = (matchup, standingsData, rosters) => {
         }
     }
     return standingsData;
+}
+
+export const getAllTimeLeagueStandings = async () => {
+    const [nflState, leagueData, rostersData] = await waitForAll(
+        getNflState(),
+        getLeagueData(),
+        getLeagueRosters(),
+    ).catch((err) => { console.error(err); });
+
+    let allTimeStandings = {};
+
+    let currentLeagueData = leagueData;
+    while (currentLeagueData) {
+        const rostersData = await fetch(`https://api.sleeper.app/v1/league/${currentLeagueData.league_id}/rosters`, { compress: true })
+            .then(res => res.json())
+            .catch(err => { console.error(err); return null; });
+
+        if (!rostersData) break;
+
+        for (const team of rostersData) {
+            if (!allTimeStandings[team.roster_id]) {
+                allTimeStandings[team.roster_id] = {
+                    rosterID: team.roster_id,
+                    wins: 0,
+                    losses: 0,
+                    ties: 0,
+                    fpts: 0,
+                    fptsAgainst: 0,
+                    maxFpts: 0,
+                    ptsDiff: 0,
+                };
+            }
+            allTimeStandings[team.roster_id].wins += team.settings.wins;
+            allTimeStandings[team.roster_id].losses += team.settings.losses;
+            allTimeStandings[team.roster_id].ties += team.settings.ties;
+            allTimeStandings[team.roster_id].fpts += team.settings.fpts + (team.settings.fpts_decimal / 100);
+            allTimeStandings[team.roster_id].fptsAgainst += team.settings.fpts_against + (team.settings.fpts_against_decimal / 100);
+            allTimeStandings[team.roster_id].maxFpts += team.settings.ppts + (team.settings.ppts_decimal / 100);
+            allTimeStandings[team.roster_id].ptsDiff += team.settings.fpts + (team.settings.fpts_decimal / 100) - team.settings.fpts_against + (team.settings.fpts_against_decimal / 100);
+        }
+
+        for (const record in allTimeStandings) {
+            allTimeStandings[record].fpts = round(allTimeStandings[record].fpts);
+            allTimeStandings[record].fptsAgainst = round(allTimeStandings[record].fptsAgainst);
+            allTimeStandings[record].maxFpts = round(allTimeStandings[record].maxFpts);
+            allTimeStandings[record].ptsDiff = round(allTimeStandings[record].ptsDiff);
+        }
+
+        if (!currentLeagueData.previous_league_id) break;
+        currentLeagueData = await getLeagueData(currentLeagueData.previous_league_id).catch((err) => { console.error(err); return null; });
+    }
+
+    return allTimeStandings;
 }

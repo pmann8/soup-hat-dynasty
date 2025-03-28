@@ -199,20 +199,20 @@
         position: absolute;
         text-align: center;
         margin: 0;
+        color: #bbb;
     }
 
     .match {
         width: 280px;
-        border: 1px solid var(--ccc);
-        background-color: var(--bracketMatch);
+        background-color: var(--darkBlue);
         border-radius: 10px;
         margin: 2em 1em;
         z-index: 2;
     }
 
     .selected {
-        background-color: var(--matchupSelected);
-        box-shadow: 0 0 8px 6px var(--matchupSelected);
+        background-color: var(--lightBlue);
+        /* box-shadow: 0 0 8px 6px var(--matchupSelected); */
     }
 
     .clickable {
@@ -240,7 +240,7 @@
         line-height: 1.1em;
         flex-grow: 1;
         word-break: break-word;
-        color: var(--g444);
+        color: #bbb;
         width: 100%;
     }
 
@@ -263,13 +263,13 @@
         line-height: 1.1em;
         font-size: 0.85em;
         padding-left: 1em;
-        color: var(--g333);
+        color: #bbb;
         text-align: right;
     }
 
     .projectedPoints {
         font-size: 0.8em;
-        color: var(--g999);
+        color: #bbb;
     }
 
     /* SVG styling */
@@ -374,13 +374,13 @@
             <!-- Only draw the bracket once for each pair -->
             <svg class="lineParent">
                 <!-- top line of bracket -->
-                <line stroke-width="2px" stroke="#ccc"  x1="{getOffset(anchors[Math.floor(inx / 2)].xLeft, 350)}" y1="{getOffset(anchors[Math.floor(inx / 2)].yTop, 20)}" x2="{getOffset(anchors[Math.floor(inx / 2)].xMiddle, 425)}" y2="{getOffset(anchors[Math.floor(inx / 2)].yTop, 20)}" class="line"/>
+                <line stroke-width="2px" stroke="#bbb"  x1="{getOffset(anchors[Math.floor(inx / 2)].xLeft, 350)}" y1="{getOffset(anchors[Math.floor(inx / 2)].yTop, 20)}" x2="{getOffset(anchors[Math.floor(inx / 2)].xMiddle, 425)}" y2="{getOffset(anchors[Math.floor(inx / 2)].yTop, 20)}" class="line"/>
                 <!-- vertical line of bracket -->
-                <line stroke-width="2px" stroke="#ccc"  x1="{getOffset(anchors[Math.floor(inx / 2)].xMiddle, 425)}" y1="{getOffset(anchors[Math.floor(inx / 2)].yTop, 20)}" x2="{getOffset(anchors[Math.floor(inx / 2)].xMiddle, 425)}" y2="{getOffset(anchors[Math.floor(inx / 2)].yBottom, 20)}" class="line"/>
+                <line stroke-width="2px" stroke="#bbb"  x1="{getOffset(anchors[Math.floor(inx / 2)].xMiddle, 425)}" y1="{getOffset(anchors[Math.floor(inx / 2)].yTop, 20)}" x2="{getOffset(anchors[Math.floor(inx / 2)].xMiddle, 425)}" y2="{getOffset(anchors[Math.floor(inx / 2)].yBottom, 20)}" class="line"/>
                 <!-- right line of bracket -->
-                <line stroke-width="2px" stroke="#ccc"  x1="{getOffset(anchors[Math.floor(inx / 2)].xMiddle, 425)}" y1="{getOffset(anchors[Math.floor(inx / 2)].yMiddle, 20)}" x2="{getOffset(anchors[Math.floor(inx / 2)].xRight, 550)}" y2="{getOffset(anchors[Math.floor(inx / 2)].yMiddle, 20)}" class="line"/>
+                <line stroke-width="2px" stroke="#bbb"  x1="{getOffset(anchors[Math.floor(inx / 2)].xMiddle, 425)}" y1="{getOffset(anchors[Math.floor(inx / 2)].yMiddle, 20)}" x2="{getOffset(anchors[Math.floor(inx / 2)].xRight, 550)}" y2="{getOffset(anchors[Math.floor(inx / 2)].yMiddle, 20)}" class="line"/>
                 <!-- bottom line of bracket -->
-                <line stroke-width="2px" stroke="#ccc"  x1="{getOffset(anchors[Math.floor(inx / 2)].xLeft, 350)}" y1="{getOffset(anchors[Math.floor(inx / 2)].yBottom, 20)}" x2="{getOffset(anchors[Math.floor(inx / 2)].xMiddle, 425)}" y2="{getOffset(anchors[Math.floor(inx / 2)].yBottom, 20)}" class="line"/>
+                <line stroke-width="2px" stroke="#bbb"  x1="{getOffset(anchors[Math.floor(inx / 2)].xLeft, 350)}" y1="{getOffset(anchors[Math.floor(inx / 2)].yBottom, 20)}" x2="{getOffset(anchors[Math.floor(inx / 2)].xMiddle, 425)}" y2="{getOffset(anchors[Math.floor(inx / 2)].yBottom, 20)}" class="line"/>
             </svg>
         {/if}
     {:else}

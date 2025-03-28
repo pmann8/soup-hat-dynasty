@@ -108,7 +108,13 @@
 	const toggleSelected = () => {
 		selected = selected == "0px" ? calcHeight() + "px" : "0px";
 		status = status == "minimized" ? "expanded" : "minimized";
-	}
+		const parentElement = document.querySelector('.team');
+		if (status === "expanded") {
+			parentElement.classList.add('expanded');
+		} else {
+			parentElement.classList.remove('expanded');
+		}
+	};
 
 	let innerWidth;
 
@@ -133,7 +139,7 @@
 
 <style>
 	h5 {
-    text-align: center;
+		text-align: center;
 		margin: 0.2em auto;
 	}
 	
@@ -142,11 +148,11 @@
 		border-radius: 50%;
 		height: 40px;
 		margin-right: 15px;
-		border: 0.25px solid #777;
 	}
 
 	.team {
 		margin: 4px 10px 10px;
+		text-align: center; /* Add this line to center the content */
 	}
 
 	:global(.clickable) {
@@ -154,9 +160,12 @@
 	}
 
 	:global(.teamInner) {
-		box-shadow: 0px 3px 3px -2px var(--boxShadowOne), 0px 3px 4px 0px var(--boxShadowTwo), 0px 1px 8px 0px var(--boxShadowThree);
 		display: block;
 	    margin: 0 auto;
+	}
+
+	:global(.teamInner .mdc-data-table__header-cell) {
+		background-color: var(--lightBlue) !important;
 	}
 
 	.rosterBench{
@@ -196,6 +205,7 @@
 		font-size: 1.5em;
 		font-weight: 500;
 		margin: 12px 0;
+		color: #bbb;
 	}
 
 	h5 {
@@ -247,13 +257,13 @@
 		font-style: italic;
 	}
 
+	:global(.bench) {
+		background-color: var(--lightBlue);
+	}	
+
 	:global(.interactive) {
 		vertical-align: middle;
 		cursor: pointer;
-	}
-
-	:global(.bench) {
-		background-color: var(--ir);
 	}
 </style>
 

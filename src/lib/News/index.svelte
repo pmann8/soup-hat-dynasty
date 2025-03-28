@@ -52,6 +52,7 @@
 
     h4 {
         text-align: center;
+        color: #bbb;
     }
 
     .articles {

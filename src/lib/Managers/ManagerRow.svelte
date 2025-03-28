@@ -28,19 +28,19 @@
         justify-content: left;
         align-items: center;
         padding: 1em 0;
-        background-color: var(--fff);
+        background-color: var(--lightBlue);
         background-repeat: no-repeat;
         background-position: 15% 50%;
         margin: 0.5em 0;
-        border-radius: 2em;
-        border: 1px solid var(--ccc);
-        box-shadow: 0 0 6px 0 var(--bbb);
+        border-radius: 30px;
+        box-shadow: 0 0 6px 0 var(--lightBlue);
         cursor: pointer;
     }
 
     .manager:hover {
-        box-shadow: 0 0 10px 0 bar(--g999);
-        background-color: bar(--eee);
+        background-color: rgba(2, 6, 23, 0.3); /* dark blue with 80% opacity */        
+        box-shadow: 0 0 6px 0 rgba(2, 6, 23, 0.3);
+
     }
 
     .photo {
@@ -49,7 +49,8 @@
         border-radius: 100%;
         vertical-align: middle;
         margin-left: 1em;
-        box-shadow: 0 0 2px 1px var(--bbb);
+        border: 1px solid var(--darkBlue); /* white border for better visibility */
+        background-color: var(--darkBlue); /* white background for better visibility */
     }
 
     .name {
@@ -125,8 +126,7 @@
         width: 25px;
         font-weight: 600;
         border-radius: 15px;
-        background-color: var(--blueTwo);
-        border: 1px solid var(--blueOne);
+        background-color: var(--midBlue);
         color: #fff;
     }
 
@@ -248,6 +248,9 @@
             {#if manager.favoriteTeam}
                 <div class="infoIcon">
                     <img class="infoImg" src="https://sleepercdn.com/images/team_logos/nfl/{manager.favoriteTeam}.png" alt="favorite team"/>
+                </div>               
+                <div class="infoAnswer">
+                    {manager.favoriteTeam.toUpperCase()}
                 </div>
             {:else}
                 <div class="infoIcon question">
@@ -267,7 +270,7 @@
             {:else}
                 <div class="infoIcon question">
                     <img class="infoImg" src="/managers/question.jpg" alt="favorite team"/>
-                </div>
+                </div> 
             {/if}
         </div>
         <!-- Rebuild mode (optional and only displayed for dynasty leagues) -->

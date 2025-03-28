@@ -40,7 +40,7 @@
 
 <style>
     :global(.button) {
-        color: #aaa;
+        color: #bbb;
         cursor: pointer;
         vertical-align: sub;
     }
@@ -61,7 +61,7 @@
     .pg {
         font-size: 1.2em;
         padding: .4em;
-        color: #aaa;
+        color: #bbb;
     }
     
     .spacer {
@@ -79,7 +79,7 @@
     }
 
     .selected {
-        color: var(--blueOne);
+        color: #0082c3;
         cursor: default;
         user-select: none;
     }

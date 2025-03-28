@@ -106,8 +106,7 @@
     .scoreBoard {
         width: 97%;
         border-radius: 20px;
-        background-color: var(--rivalryBack);
-        border: 1px solid var(--aaa);
+        background-color: var(--midBlue);
         margin: 2em auto;
         padding: 2em 0;
         max-width: 1000px;
@@ -116,11 +115,13 @@
         text-align: center;
         font-size: 2.4em;
         margin: 1.3em 0 0;
+        color: #bbb;
     }
     h3 {
         text-align: center;
         font-size: 1.9em;
         margin: 20px 0 16px;
+        color: #bbb;
     }
     .trades {
         width: 95%;
@@ -182,25 +183,7 @@
             <ComparissonBar sideOne={rivalry.wins.one} sideTwo={rivalry.wins.two} label="Wins" unit="wins" />
             <!-- points -->
             <ComparissonBar sideOne={parseFloat(round(rivalry.points.one))} sideTwo={parseFloat(round(rivalry.points.two))} label="Points" unit="pts" />
-            <h3>Matchups</h3>
-            <RivalryControls bind:selected={selected} {year} {displayWeek} length={rivalry.matchups.length} />
-            <Matchup key={`${playerOne}-${playerTwo}`} ix={selected} active={selected} {year} {matchup} players={playersInfo.players} {displayWeek} expandOverride={true} {leagueTeamManagers} />
-        </div>
-    {/if}
-    <div class="scoreBoard">
-        {#if playerOne && playerTwo }
-            <!-- trades -->
-            <h3>Trade History</h3>
-            <div class="trades">
-                {#each tradeHistory as transaction }
-                    <TradeTransaction players={playersInfo.players} {transaction} {leagueTeamManagers} />
-                {:else}
-                    No trades yet...
-                {/each}
-            </div>
-        {/if}
-    </div>
-    {#if playerOne && playerTwo && playerOneRecords && playerTwoRecords }
+            {#if playerOne && playerTwo && playerOneRecords && playerTwoRecords }
         <div class="scoreBoard">
             <!-- record comparisson -->
             <h3>Performance Comparisson</h3>
@@ -252,4 +235,22 @@
             />
         </div>
     {/if}
+            <h3>Matchups</h3>
+            <RivalryControls bind:selected={selected} {year} {displayWeek} length={rivalry.matchups.length} />
+            <Matchup key={`${playerOne}-${playerTwo}`} ix={selected} active={selected} {year} {matchup} players={playersInfo.players} {displayWeek} expandOverride={true} {leagueTeamManagers} />
+        </div>
+    {/if}
+    <div class="scoreBoard">
+        {#if playerOne && playerTwo }
+            <!-- trades -->
+            <h3>Trade History</h3>
+            <div class="trades">
+                {#each tradeHistory as transaction }
+                    <TradeTransaction players={playersInfo.players} {transaction} {leagueTeamManagers} />
+                {:else}
+                    No trades yet...
+                {/each}
+            </div>
+        {/if}
+    </div>
 {/if}

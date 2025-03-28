@@ -16,15 +16,15 @@
     
     .name {
         position: relative;
-        text-align: center;
+        color: #bbb;
     }
 
     .avatar {
         border-radius: 50%;
         height: 40px;
         width: 40px;
-        border: 2px solid var(--blueOne);
-        background-color: var(--fff);
+        border: 2px solid var(--darkBlue);
+        background-color: var(--darkBlue);
     }
 
     .ownerName {
@@ -36,7 +36,7 @@
 
     .currentOwner {
         font-style: italic;
-        color: var(--aaa);
+        color: #bbb;
         font-size: 0.7em;
     }
 
@@ -45,35 +45,52 @@
     }
 
     .date {
-        color: var(--g999);
+        color: #bbb;
         font-style: italic;
         font-size: 0.7em;
         text-align: center;
         padding: 0.7em 0 1em;
-        background-color: var(--fff);
-        border-radius: 0 0 0 40px;
-        border-left: 2px solid var(--blueOne);
-        border-right: 1px solid var(--ddd);
+        background-color: var(--lightBlue);
+        border-radius: 0 0 10px 40px;
+        border-left: 2px solid var(--darkBlue);
         margin-bottom: 3em;
     }
 
-    table {
+    :global(.tradeTransaction table) {
         width: 100%;
-        border-collapse: collapse;
+        border-collapse: separate; /* Change to separate to allow border-radius */
+        border-spacing: 0;
         table-layout: fixed;
-        /*
-            the height setting is ignored, but
-            allows the holder class div to have
-            a height of 100%
-        */
         height: 1px;
     }
 
-    tbody {
-        background-color: var(--fff);
-        border-top: 2px solid var(--blueOne);
-        border-left: 2px solid var(--blueOne);
-        border-right: 1px solid var(--ddd);
+    :global(.tradeTransaction tbody) {
+        background-color: var(--lightBlue);
+        border-top: 2px solid var(--darkBlue);
+        border-left: 2px solid var(--darkBlue);
+    }
+
+    :global(.tradeTransaction table tbody tr:first-child td:first-child) {
+        border-top-left-radius: 10px;
+        border-left: 2px solid var(--darkBlue);
+        border-top: 2px solid var(--darkBlue);
+        overflow: hidden; /* Ensure content respects the border-radius */
+    }
+
+    :global(.tradeTransaction table tbody tr:first-child td:last-child) {
+        border-top-right-radius: 10px;
+        border-top: 2px solid var(--darkBlue);
+        overflow: hidden; /* Ensure content respects the border-radius */
+    }
+
+    :global(.tradeTransaction table tbody tr:not(:first-child):not(:last-child) td:first-child) {
+        border-left: 2px solid var(--darkBlue);
+        overflow: hidden; /* Ensure content respects the border-radius */
+    }
+
+    :global(.tradeTransaction table tbody tr:last-child td:first-child) {
+        border-left: 2px solid var(--darkBlue);
+        overflow: hidden; /* Ensure content respects the border-radius */
     }
 
     .holder {

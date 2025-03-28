@@ -307,19 +307,7 @@
 		</Button>
 	</div>
 		{#if show == "player_trade_count"}
-			<div class="searchContainer">
-				<span class="clearPlaceholder" />
-				<Textfield
-					disabled value=""
-					class="shaped-outlined"
-					variant="outlined"
-					label="Search for a player..."
-					on:input={() => search()}
-				>
-					<Icon class="material-icons" slot="leadingIcon">search</Icon>
-				</Textfield>
-				<span class="clearPlaceholder" />
-			</div>
+			<div class="searchContainer"> </div>
 		{:else}
 			<div class="searchContainer">
 				<span class="clearPlaceholder" />
@@ -360,17 +348,17 @@
 				<MostTradedTransaction {players} {playersTraded2} />
 			</div>
 		{:else}
-			<Pagination {perPage} total={totalTransactions} bind:page={page} target={top} scroll={false} />
-			<div class="transactions-child">
-					{#each displayTransactions as transaction (transaction.id)}
+		<Pagination {perPage} total={totalTransactions} bind:page={page} target={top} scroll={false} />
+		<div class="transactions-child">
+			{#each displayTransactions as transaction (transaction.id)}
 						{#if transaction.type == "waiver"}
-							<WaiverTransaction {players} {transaction} {leagueTeamManagers} />
-						{:else}
+					<WaiverTransaction {players} {transaction} {leagueTeamManagers} />
+				{:else}
 							<TradeTransaction {players} {transaction} {leagueTeamManagers} />
-						{/if}
-					{/each}
-			</div>
-			<Pagination {perPage} total={totalTransactions} bind:page={page} target={top} scroll={true} />
+				{/if}
+			{/each}
+		</div>
+		<Pagination {perPage} total={totalTransactions} bind:page={page} target={top} scroll={true} />
 		{/if}
 	</div>
 

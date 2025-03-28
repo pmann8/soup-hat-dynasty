@@ -45,12 +45,14 @@
         text-align: center;
         font-size: 1.4em;
         margin: 10px;
+        color: #bbb;
     }
     .stats {
         display: flex;
         width: 75%;
         margin: 0 auto;
-        justify-content: space-between;
+        justify-content: space-between;        
+        color: #bbb;
     }
     @media (max-width: 650px) {
         h4 {

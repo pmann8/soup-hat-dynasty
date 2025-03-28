@@ -102,37 +102,40 @@
 
 <style>
     .pageBody {
-        position: relative;
-        z-index: 1;
-    }
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center; /* Center children horizontally */
+	}
 
-    :global(.list) {
-        width: 90%;
-        max-width: 800px;
-        border: 1px solid
-        var(--mdc-theme-text-hint-on-background, var(--d7d7d7));
-        margin: 15px auto;
-        padding: 0 !important;
-        box-shadow: 0px 3px 3px -2px var(--boxShadowOne), 0px 3px 4px 0px var(--boxShadowTwo), 0px 1px 8px 0px var(--boxShadowThree);
-    }
-
+	:global(.list) {
+		background-color: var(--lightBlue);
+		width: 90%;
+		max-width: 800px;
+		border: 1px solid var(--bbb);
+		border-radius: 5px;
+		margin: 15px 0; /* Remove auto margin and use 0 for vertical centering */
+		padding: 0 !important;
+	}
 
     :global(.linkText) {
         font-size: 1.1em;
     }
 
     a {
-        color: var(--g555);
+        color: #bbb;
         font-size: 1.1em;
         text-decoration: none;
     }
 
     h4 {
         text-align: center;
+		color: #bbb;
     }
 
     .disclaimer {
-        color: #888;
+        color: #bbb;
         text-align: center;
     }
 </style>

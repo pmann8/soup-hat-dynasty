@@ -1,16 +1,17 @@
 <script>
-  	import { getTeamNameFromTeamManagers } from '$lib/utils/helperFunctions/universalFunctions';
-    import {Row, Cell } from '@smui/data-table';
-    export let draftRow, draftType, row, reversalRound, previous=false, players, year, leagueTeamManagers;
+    import { getTeamNameFromTeamManagers } from '$lib/utils/helperFunctions/universalFunctions';
+    import { Row, Cell } from '@smui/data-table';
+    export let draftRow, draftType, row, reversalRound, previous = false, players, year, leagueTeamManagers;
 </script>
 
 <style>
     :global(.draftCell) {
         position: relative;
+        background-color: var(--lightBlue); /* Darker background for dark mode */
     }
 
     :global(.changedHands) {
-        background-color: var(--draftSwapped);
+        background-color: #333; /* Darker red for changed hands */
     }
 
     .draftPos {
@@ -18,7 +19,7 @@
         top: 0.3em;
         left: 0.3em;
         font-style: italic;
-        color: #aaa;
+        color: #bbb; /* Lighter color for better readability */
     }
 
     .draftPosPrev {
@@ -26,30 +27,30 @@
         top: 0.1em;
         left: 0.1em;
         font-style: italic;
-        color: #444;
+        color: #000; /* Lighter color for better readability */
     }
 
     .newOwner {
         font-style: italic;
-        color: #444;
+        color: #bbb; /* Lighter color for better readability */
         text-align: center;
         white-space: break-spaces;
         line-height: 1.2em;
     }
 
-	:global(.prevQB) {
+    :global(.prevQB) {
 		background-color: var(--QBfade);
-	}
+    }
 
-	:global(.prevWR) {
+    :global(.prevWR) {
 		background-color: var(--WRfade);
-	}
+    }
 
-	:global(.prevRB) {
+    :global(.prevRB) {
 		background-color: var(--RBfade);
-	}
+    }
 
-	:global(.prevTE) {
+    :global(.prevTE) {
 		background-color: var(--TEfade);
 	}
 
@@ -85,19 +86,19 @@
         background-color: var(--LBfade);
     }
 
-	.playerAvatar {
-		display: inline-block;
+    .playerAvatar {
+        display: inline-block;
         position: absolute;
         transform: translate(-50%, -50%);
         left: 50%;
         top: 45%;
-		height: 25px;
-		width: 25px;
-		background-position: center;
-		border-radius: 100%;
-		background-repeat: no-repeat;
-		background-size: auto 25px;
-	}
+        height: 25px;
+        width: 25px;
+        background-position: center;
+        border-radius: 100%;
+        background-repeat: no-repeat;
+        background-size: auto 25px;
+    }
 
     .name {
         display: block;
@@ -108,7 +109,7 @@
         white-space: break-spaces;
         line-height: 1em;
         bottom: 0.5em;
-        color: rgba(0, 0, 0, 0.87);
+        color: #000; /* Lighter color for better readability */
     }
 </style>
 

@@ -16,7 +16,7 @@
 
     .title-link {
         font-weight: 500;
-        color: var(--blueOne);
+        color: #bbb;
         text-decoration: none;
         text-align: center;
         max-height: 96px;
@@ -29,7 +29,7 @@
     }
 
     .title-link:hover {
-        color: #920505;
+        color: var(--darkBlue);
     }
 
     .body {
@@ -46,7 +46,7 @@
         position: relative;
         flex-grow: 1;
         min-width: 0;
-        max-height: 480px;
+        max-height: 250px;
         margin: 0 auto;
         overflow: hidden;
     }
@@ -102,13 +102,13 @@
         margin-top: 0;
     }
 
-    :global(.body-text div) {
-        overflow-x: scroll;
-    }
-
     .date {
         font-style: italic;
-        color: #888;
+        color: #bbb;
+    }
+
+    .hr, .author, .body {
+       color: #bbb;
     }
 </style>
 

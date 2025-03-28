@@ -215,12 +215,10 @@
 
 <style>
     .awardsCase {
-        background-color: var(--fff);
+        background-color: var(--lightBlue);
         padding: 0 0 2em;
         margin: 3em 0 4em;
-        border-bottom: 1px solid var(--aaa);
-        border-top: 1px solid var(--aaa);
-        box-shadow: 0 0 8px 4px var(--ccc);
+        box-shadow: 0 0 8px 4px var(--lightBlue);
     }
 
     .awardsCaseInner {
@@ -234,6 +232,7 @@
         font-size: 1.5em;
         margin: 1.5em 0 0.5em;
         font-weight: 200;
+        color: #bbb;
     }
 
     .award {
@@ -254,6 +253,7 @@
         font-size: 0.85em;
         width: 110px;
         margin-bottom: 0.5em;
+        color: #bbb;
     }
 
     .awardLabel {
@@ -261,12 +261,13 @@
         margin-top: 1em;
         font-weight: 500;
         width: 130px;
+        color: #bbb;
     }
 
     .subText {
         font-size: 0.8em;
         width: 130px;
-        color: var(--g555);
+        color: #bbb;
         margin-top: 0.3em;
         font-style: italic;
     }
@@ -280,7 +281,7 @@
         height: 80px;
         width: 80px;
         border-radius: 100%;
-        box-shadow: 0 0 4px 1px var(--ccc);
+        border: 2px solid var(--darkBlue);
         text-align: center;
         overflow: hidden;
     }
