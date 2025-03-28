@@ -44,11 +44,12 @@
 	h5 {
 		text-align: center;
 		margin: 10px auto 16px;
+		color: #bbb;
 	}
 
 	.link {
 		cursor: pointer;
-		color: #888;
+		color: #bbb;
 		padding: 10px 20px;
 		margin-bottom: 10px;
 	}

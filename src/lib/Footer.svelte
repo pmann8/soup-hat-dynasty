@@ -49,13 +49,13 @@
 
 <style>
 	footer {
-		background-color: var(--f8f8f8);
+		background-color: var(--midBlue);
 		width: 100%;
         display: block;
         position: absolute;
         bottom: 0;
 		z-index: 1;
-		border-top: 1px solid #920505;
+		border-top: 1px solid var(--darkBlue);
 		padding: 30px 0 60px;
 		text-align: center;
 		color: #777;
@@ -86,7 +86,7 @@
 	}
 
 	.navLink:hover {
-		color: #920505;
+		color: #0082c3;
 	}
 
 	.updateNotice {

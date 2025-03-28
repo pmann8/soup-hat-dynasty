@@ -85,13 +85,13 @@
     $: top = el?.getBoundingClientRect() ? el?.getBoundingClientRect().top  : 0;
 
     const expandClose = () => {
-        if(expandOverride) return;
+        if (expandOverride) return;
         active = active == ix ? null : ix;
-        setTimeout( () => {
-            window.scrollTo({left: 0, top, behavior: 'smooth'});
+        el.classList.toggle('expanded', active == ix);
+        setTimeout(() => {
+            window.scrollTo({ left: 0, top, behavior: 'smooth' });
         }, 200);
-        ;
-    }
+    };
 
     let innerWidth;
 
@@ -122,18 +122,20 @@
         display: flex;
         justify-content: space-between;
         position: relative;
-        border: 1px solid #bbb;
         border-radius: 10px;
-        opacity: 0.8;
         cursor: pointer;
 		transition: opacity 0.5s;
         overflow: hidden;
     }
 
     .header:hover {
-        opacity: 1;
+        opacity: 0.8;
     }
 
+    .header.expanded {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
     .opponent {
         display: flex;
         align-items: center;
@@ -157,23 +159,23 @@
         justify-content: flex-start;
         left: 0;
         text-align: left;
-        background-color: #485566;
+        background: linear-gradient(to right, var(--lightBlue) 50%, #920505);
     }
 
     :global(.homeGlow) {
-        box-shadow: 0 0 6px 4px #3279cf;
-        background-color: #00316b !important;
+        background: none !important;
+        background-color: var(--darkBlue) !important;
     }
 
     .away {
         justify-content: flex-end;
         right: 0;
         text-align: right;
-        background-color: #8b6969;
+        background: linear-gradient(to right, var(--darkBlue) 25%, #8b6969);
     }
 
     :global(.awayGlow) {
-        box-shadow: 0 0 6px 4px #d15454;
+        background: none !important;
         background-color: #920505 !important;
     }
 
@@ -193,8 +195,8 @@
 		height: 35px;
 		width: 35px;
 		margin: 0;
-		border: 0.25px solid #777;
-        background-color: #eee;
+		/* border: 0.25px solid var(--lightBlue); */
+        background-color: var(--lightBlue);
 	}
 
 	.playerAvatar {
@@ -266,20 +268,19 @@
 
     .rosters {
         position: relative;
-        background-color: var(--fff);
-        border-radius: 8px;
+        background-color: var(--lightBlue);
+        border-bottom-left-radius: 8px;        
+        border-bottom-right-radius: 8px;
         overflow: hidden;
-        border-left: 1px solid #bbb;
-        border-right: 1px solid #bbb;
-        border-bottom: 1px solid #bbb;
 		transition: max-height 0.4s;
+        border-top: 1px solid #bbb;
     }
 
     .line {
         position: relative;
         display: flex;
         justify-content: space-between;
-        border-top: 1px solid #bbb;
+        border-bottom: 1px solid #bbb;
     }
 
     .player {
@@ -313,11 +314,12 @@
     .playerInfo {
         display: inline-block;
         padding: 0 6px;
+        color: #bbb;
     }
 
     .playerTeam {
         display: inline-block;
-        color: #888;
+        color: #bbb;
         font-style: italic;
         text-align: center;
         font-size: 0.5em;
@@ -381,23 +383,24 @@
         left: 50%;
         height: 100%;
         width: 0;
-        border-left: 1px solid var(--eee);
+        border-left: 1px solid #bbb;
         z-index: 1;
     }
 
     .close {
         display: block;
         width: 100%;
-        background-color: var(--eee);
+        background-color: var(--lightBlue);
         text-align: center;
         cursor: pointer;
         z-index: 2;
         font-size: 1.1em;
         padding: 6px 0;
+        color: #bbb;
     }
 
     .close:hover {
-        background-color: var(--ddd);
+        background-color: rgba(2, 6, 23, 0.3); /* dark blue with 80% opacity */
     }
 
     .nameHolder {
@@ -430,7 +433,7 @@
     }
 
     .totalProjection {
-        color: #ccc;
+        color: #fff;
         font-size: 0.7em;
         font-style: italic;
     }
@@ -443,10 +446,20 @@
 
     .pointsL {
         left: 1em;
+        color: #bbb;
     }
 
     .pointsR {
         right: 1em;
+        color: #bbb;
+    }
+
+    .pointsL .totalProjection {
+        color: #bbb;
+    }
+
+    .pointsR .totalProjection {
+        color: #bbb;
     }
 
     .playerEmpty {
@@ -487,7 +500,6 @@
             <div class="name">{home.manager.name}</div>
             <div class="totalPoints totalPointsR">{round(homePointsTotal)}<div class="totalProjection">{round(homeProjectionTotal)}</div></div>
         </div>
-        <img class="divider" src="/{winning}Divider.jpg" alt="divider" />
         <div class="opponent away{winning == "away" ? " awayGlow" : ""}">
             <div class="totalPoints totalPointsL">{round(awayPointsTotal)}<div class="totalProjection">{round(awayProjectionTotal)}</div></div>
             <div class="name" >{away.manager.name}</div>

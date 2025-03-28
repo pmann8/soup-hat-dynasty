@@ -12,7 +12,7 @@
 	}
     
     let entries = Object.entries(playersTraded2);
-    let sorted = entries.sort((a, b) => b[1] - a[1]);
+    let sorted = entries.sort((a, b) => b[1] - a[1]).slice(0, 20);
 </script>
 
 <style>
@@ -28,19 +28,32 @@
     .tradeSlot {
         display: inline-block;
         vertical-align: middle;
-        height: 50px;
-        width: 50px;
+        height: 40px;
+        width: 40px;
         background-position: center;
         border: 2px solid;
         border-radius: 100%;
         position: relative;
-        border-color: var(--aaa);
         background-color: var(--eee);
     }
 
     .playerAvatar {
         background-repeat: no-repeat;
         background-size: auto 50px;
+    }    
+
+    :global(.mostTraded .mdc-data-table) {
+	    background-color: var(--lightBlue) !important;
+        border: none !important;
+    }    
+
+    :global(.mostTraded .mdc-data-table__header-cell) {
+	    background-color: var(--lightBlue) !important;
+    }
+
+    :global(.mostTraded .mdc-data-table__cell) {
+        border-left: none !important;
+        border-top: none !important;
     }
 </style>
 

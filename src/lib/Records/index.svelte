@@ -107,24 +107,24 @@
 
 <div class="rankingsWrapper">
 
-    <div class="buttonHolder">
-        <Group variant="outlined">
+    <div class="buttonHolder">        
+        <div class="buttons">
             <Button class="selectionButtons" onclick={() => key = "regularSeasonData"} variant="{key == "regularSeasonData" ? "raised" : "outlined"}">
                 <Label>Regular Season</Label>
             </Button>
             <Button class="selectionButtons" onclick={() => key = "playoffData"} variant="{key == "playoffData" ? "raised" : "outlined"}">
                 <Label>Playoffs</Label>
             </Button>
-        </Group>
-        <br />
-        <Group variant="outlined">
+        </div>
+        <br />        
+        <div class="buttons">
             <Button class="selectionButtons" onclick={() => display = "allTime"} variant="{display == "allTime" ? "raised" : "outlined"}">
                 <Label>All-Time Records</Label>
             </Button>
             <Button class="selectionButtons" onclick={() => display = "season"} variant="{display == "season" ? "raised" : "outlined"}">
                 <Label>Season Records</Label>
             </Button>
-        </Group>
+        </div>
     </div>
 
     {#if display == "allTime"}
