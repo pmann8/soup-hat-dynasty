@@ -10,9 +10,9 @@ export const cleanName = (name) => {
 
 export const round = (num) => {
     if (typeof (num) == "string") {
-        num = parseFloat(num)
+        num = parseFloat(num);
     }
-    return (Math.round((num + Number.EPSILON) * 100) / 100).toFixed(2);
+    return parseFloat(Math.round((num + Number.EPSILON) * 100) / 100);
 }
 
 const min = (stats, roundOverride, max) => {
@@ -252,6 +252,22 @@ export const getTeamFromTeamManagers = (teamManagers, rosterID, year) => {
     }
     return teamManagers.teamManagersMap[year][rosterID]['team'];
 }
+
+export const getTeamFromTeamManagersAndManagerID = (teamManagers, managerID, year) => {
+    if (!managerID) return null;
+    const years = Object.keys(teamManagers.teamManagersMap).sort((a, b) => b - a);
+    for (const year of years) {
+        for (const rosterID in teamManagers.teamManagersMap[year]) {
+            if (teamManagers.teamManagersMap[year][rosterID].managers.indexOf(managerID) > -1) {
+
+                return teamManagers.teamManagersMap[year][rosterID].team;
+            }
+        }
+    }
+
+    return null;
+}
+
 
 export const getNestedTeamNamesFromTeamManagers = (teamManagers, year, rosterID) => {
     const originalName = teamManagers.teamManagersMap[year][rosterID]['team']['name'];

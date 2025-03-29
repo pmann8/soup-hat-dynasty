@@ -2,7 +2,7 @@
     import { gotoManager } from '$lib/utils/helper';
   	import { Row, Cell } from '@smui/data-table';
 
-    export let columnOrder, allTimeColumnOrder, team, standing, leagueTeamManagers, isAllTime;
+    export let columnOrder, team, standing, leagueTeamManagers, isAllTime;
 </script>
 
 <style>
@@ -36,14 +36,8 @@
                 {team.name}
             </div>
         </div>
-    </Cell>
-    {#if isAllTime}
-        {#each allTimeColumnOrder as allTimeColumn}
-            <Cell class="center">{standing[allTimeColumn.field]}</Cell>
-        {/each}
-    {:else}        
-        {#each columnOrder as column}
-            <Cell class="center">{standing[column.field]}</Cell>
-        {/each}
-    {/if }
+    </Cell>   
+    {#each columnOrder as column}
+        <Cell class="center">{standing[column.field]}</Cell>
+    {/each}
 </Row>
