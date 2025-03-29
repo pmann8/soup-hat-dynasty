@@ -100,6 +100,13 @@
     :global(.body-text a) {
         margin-top: 0;
         word-break: break-word;
+        color: var(--darkBlue); /* Change this to your desired link color */
+        text-decoration: none; /* Optional: remove underline */
+    }
+
+    :global(.body-text a:hover) {
+        color: #0082c3; /* Change this to your desired hover color */
+        text-decoration: underline; /* Optional: add underline on hover */
     }
 
     :global(.body-text blockquote) {

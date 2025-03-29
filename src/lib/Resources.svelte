@@ -109,17 +109,16 @@
 		align-items: center; /* Center children horizontally */
 	}
 
-	:global(.list) {
+	:global(.pageBody .list) {
 		background-color: var(--lightBlue);
 		width: 90%;
 		max-width: 800px;
-		border: 1px solid var(--bbb);
 		border-radius: 5px;
 		margin: 15px 0; /* Remove auto margin and use 0 for vertical centering */
 		padding: 0 !important;
 	}
 
-    :global(.linkText) {
+    :global(.pageBody .linkText) {
         font-size: 1.1em;
     }
 
