@@ -56,7 +56,7 @@
 <svelte:window bind:innerWidth={innerWidth} />
 
 <style>
-    :global(.navBar) {
+    :global(.parent .navBar) {
         display: inline-flex;
         position: relative;
         justify-content: center;
@@ -68,16 +68,21 @@
         width: 22px;
     }
 
-    :global(.mdc-tab--active) {
+    :global(.navBar .mdc-tab--active) {
         background-color: var(--darkBlue) !important; /* Change active tab background color */
 		border-radius: 5px;
 	}
 
-	:global(.mdc-tab__icon) {
+	:global(.navBar .mdc-tab:hover) {
+        background-color: rgba(187, 187, 187, 0.25);
+		border-radius: 5px;
+	}
+
+	:global(.navBar .mdc-tab__icon) {
 		color: #bbb !important; /* Change active tab icon color to orange */
 	}
 
-	:global(.mdc-tab__text-label) {
+	:global(.navBar .mdc-tab__text-label) {
 		color: #bbb !important; /* Change active tab text color to orange */
 	}
 
@@ -107,16 +112,16 @@
         z-index: 4;
     }
 
-    :global(.mdc-deprecated-list) {
+    :global(.navBar .mdc-deprecated-list) {
         padding: 0;
 		border: none !important;
     }
 
-    :global(.subText) {
+    :global(.navBar .subText) {
         font-size: 0.8em;
     }
 
-    :global(.dontDisplay) {
+    :global(.navBar .dontDisplay) {
         display: none;
     }
 </style>
