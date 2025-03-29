@@ -2,7 +2,7 @@
 	import { Standings } from '$lib/components'
 
 	export let data;
-	const {standingsData, leagueTeamManagersData, allTimeStandingsData} = data;
+	const {standingsData, leagueTeamManagersData} = data;
 </script>
 
 <style>
@@ -14,5 +14,5 @@
 </style>
 
 <div class="holder">
-	<Standings {standingsData} {leagueTeamManagersData} {allTimeStandingsData} />
+	<Standings {standingsData} {leagueTeamManagersData} />
 </div>
