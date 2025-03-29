@@ -58,7 +58,7 @@
 		border-top: 1px solid var(--darkBlue);
 		padding: 30px 0 60px;
 		text-align: center;
-		color: #777;
+        color: #bbb;
 	}
 
 	#navigation {
@@ -89,12 +89,20 @@
 		color: #0082c3;
 	}
 
+	.navButton:hover, a:hover {
+		color: #0082c3;
+	}
+
 	.updateNotice {
 		color: var(--g999);
 		font-style: italic;
 		font-size: 0.8em;
 		margin-top: 0;
 	}
+
+	a {
+        color: #bbb; /* Change this to your desired color */
+    }
 </style>
 
 <div class="footerSpacer" style="height: {footerHeight}px;" />

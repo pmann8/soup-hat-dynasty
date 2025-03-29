@@ -12,10 +12,17 @@
     // Least important to most important (i.e. the most important [usually wins] goes last)
     // Edit this to match your leagues settings
     const sortOrder = ["maxFpts", "fptsAgainst", "fpts", "ties", "wins"];
+    let columnOrder = [
+        { name: "Wins", field: "wins" },
+        { name: "Ties", field: "ties" },
+        { name: "Loses", field: "losses" },
+        { name: "Points For", field: "fpts" },
+        { name: "Points Against", field: "fptsAgainst" },
+        { name: "Points Difference", field: "ptsDiff" },
+        { name: "Max Points For", field: "maxFpts" },
+        { name: "Win Streak", field: "streak" }
+    ];
 
-    // Column order from left to right
-    let columnOrder = [{name: "Wins", field: "wins"}, {name: "Ties", field: "ties"}, {name: "Loses", field: "losses"}, {name: "Points For", field: "fpts"}, {name: "Points Against", field: "fptsAgainst"}, {name: "Points Difference", field: "ptsDiff"}, {name: "Max Points For", field: "maxFpts"}, {name: "Win Streak", field: "streak"}]
-    
     let loading = true;
     let preseason = false;
     let isAllTime = false;
@@ -34,7 +41,20 @@
 
         if(!asyncStandingsData) {  
             isAllTime = true;
-            columnOrder = [{name: "Win %", field: "winPercentage"}, {name: "Wins", field: "wins"}, {name: "Ties", field: "ties"}, {name: "Loses", field: "losses"}, {name: "Points For", field: "fpts"}, {name: "Points Against", field: "fptsAgainst"}, {name: "Points Difference", field: "ptsDiff"}, {name: "Points Per Game", field: "ppg"}, {name: "Potential Points", field: "potentialPoints"}, {name: "Lineup IQ", field: "lineupIQ"}, {name: "Trades", field: "trades"}, {name: "Waivers", field: "waivers"}]
+            columnOrder = [
+                { name: "Win %", field: "winPercentage" },
+                { name: "Wins", field: "wins" },
+                { name: "Ties", field: "ties" },
+                { name: "Loses", field: "losses" },
+                { name: "Points For", field: "fpts" },
+                { name: "Points Against", field: "fptsAgainst" },
+                { name: "Points Difference", field: "ptsDiff" },
+                { name: "Points Per Game", field: "ppg" },
+                { name: "Potential Points", field: "potentialPoints" },
+                { name: "Lineup IQ", field: "lineupIQ" },
+                { name: "Trades", field: "trades" },
+                { name: "Waivers", field: "waivers" }
+            ];            
             loading = false;
             preseason = true;
             return;
