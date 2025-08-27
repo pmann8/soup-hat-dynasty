@@ -21,7 +21,7 @@ export const getLeagueStandings = async () => {
     const yearData = leagueData.season;
     const regularSeasonLength = leagueData.settings.playoff_week_start - 1;
     const divisions = leagueData.settings.divisions && leagueData.settings.divisions > 1;
-    const rosters = rostersData;
+    const rosters = rostersData.rosters;
 
     // if the season hasn't started, standings can't be created
     if ((leagueData.status != "in_season" && leagueData.status != "post_season" && leagueData.status != "complete") || nflState.week < 1) {
