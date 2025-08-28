@@ -21,7 +21,7 @@ export const getLeagueStandings = async () => {
     const yearData = leagueData.season;
     const regularSeasonLength = leagueData.settings.playoff_week_start - 1;
     const divisions = leagueData.settings.divisions && leagueData.settings.divisions > 1;
-    const rosters = rostersData.rosters;
+    const rosters = rostersData && rostersData.rosters ? rostersData.rosters : rostersData;
 
     // if the season hasn't started, standings can't be created
     if ((leagueData.status != "in_season" && leagueData.status != "post_season" && leagueData.status != "complete") || nflState.week < 1) {
@@ -33,13 +33,13 @@ export const getLeagueStandings = async () => {
         const roster = rosters[rosterID];
         standings[rosterID] = {
             rosterID,
-            wins: roster.settings.wins,
-            losses: roster.settings.losses,
-            ties: roster.settings.ties,
-            fpts: round(roster.settings.fpts + (roster.settings.fpts_decimal / 100)),
-            fptsAgainst: round(roster.settings.fpts_against + (roster.settings.fpts_against_decimal / 100)),
-            maxFpts: round(roster.settings.ppts + (roster.settings.ppts_decimal / 100)),
-            ptsDiff: round(round(roster.settings.fpts + (roster.settings.fpts_decimal / 100)) - round(roster.settings.fpts_against + (roster.settings.fpts_against_decimal / 100))),
+            wins: roster.settings.wins ?? 0,
+            losses: roster.settings.losses ?? 0,
+            ties: roster.settings.ties ?? 0,
+            fpts: round(roster.settings.fpts ?? 0 + (roster.settings.fpts_decimal ?? 0 / 100)),
+            fptsAgainst: round(roster.settings.fpts_against ?? 0 + (roster.settings.fpts_against_decimal ?? 0 / 100)),
+            maxFpts: round(roster.settings.ppts ?? 0 + (roster.settings.ppts_decimal ?? 0 / 100)),
+            ptsDiff: round(round(roster.settings.fpts ?? 0 + (roster.settings.fpts_decimal ?? 0 / 100)) - round(roster.settings.fpts_against ?? 0 + (roster.settings.fpts_against_decimal ?? 0 / 100))),
             streak: roster.metadata?.streak || 0,
         }
     }
