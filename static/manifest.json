@@ -1,6 +1,6 @@
 {
-  "short_name": "League Page",
-  "name": "League Page",
+  "short_name": "Soup Hat",
+  "name": "Soup Hat Dynasty",
   "icons": [
     {
       "src": "/favicons/android-chrome-192x192.png",
@@ -16,10 +16,10 @@
     }
   ],
   "start_url": "/",
-  "background_color": "#fff",
+  "background_color": "#0c1210",
   "display": "standalone",
   "scope": "/",
-  "theme_color": "#fff",
+  "theme_color": "#0c1210",
   "shortcuts": [
     {
       "name": "Trades and Waivers",
@@ -58,5 +58,5 @@
       "url": "/resources"
     }
   ],
-  "description": "Information about the League"
+  "description": "The clubhouse for Soup Hat Dynasty"
 }

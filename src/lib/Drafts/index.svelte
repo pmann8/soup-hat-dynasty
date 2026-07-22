@@ -16,30 +16,29 @@
 	}
 
     .draft-card {
-        padding: 16px;
-        margin: 16px auto;
-        max-width: auto; /* Increased width */
+        padding: 8px 0;
+        margin: 0 auto;
+        max-width: none;
     }
 
     .draft-card h4, .draft-card h6 {
         text-align: center;
         margin: 0;
-        color: #bbb;
+        color: var(--chalk);
+        font-family: var(--font-display);
     }
 
     .draft-card h4 {
-        margin-bottom: 16px;
-        color: #bbb;
+        margin-bottom: 8px;
     }
 
     .draft-card h6 {
-        margin-top: 16px;
-        color: #bbb;
+        margin-top: 12px;
     }
 
     h4 {
         text-align: center;
-        color: #bbb;
+        color: var(--chalk);
     }
 </style>
 

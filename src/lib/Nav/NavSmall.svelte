@@ -8,7 +8,7 @@
 	import { leagueName } from '$lib/utils/helper';
 	import { enableBlog, managers } from '$lib/utils/leagueInfo';
 
-	let active = page.url.pathname;
+	let active = $derived(page.url.pathname);
 	let open = false;
 
 	const selectTab = (tab) => {
@@ -19,80 +19,72 @@
 
 <style>
 	:global(.menuIcon) {
-		position: absolute;
-		top: 15px;
-		left: 15px;
-		font-size: 2em;
-		color: #bbb;
+		font-size: 1.75em;
+		color: var(--chalk);
 		padding: 6px;
 		cursor: pointer;
+		border-radius: 2px;
+		transition: color 0.2s ease, background 0.2s ease;
 	}
 
 	:global(.menuIcon:hover) {
-		color: var(--darkBlue);
+		color: var(--copper-bright);
+		background: rgba(196, 132, 60, 0.12);
 	}
 
 	:global(.nav-drawer) {
-		z-index: 9;
+		z-index: 30;
 		top: 0;
 		left: 0;
+		background: var(--panel) !important;
+		border-right: 1px solid rgba(232, 228, 217, 0.1) !important;
 	}
-	
+
 	:global(.nav-drawer .mdc-drawer__title) {
-		color: #bbb !important;
+		color: var(--chalk) !important;
+		font-family: var(--font-display) !important;
+		font-weight: 800 !important;
+		letter-spacing: -0.03em !important;
 	}
 
 	:global(.nav-drawer .mdc-deprecated-list-item--activated) {
-        background-color: rgba(2, 6, 23, 0.25); /* Change active tab background color */
-		border-radius: 5px;
-		color: #bbb !important;
+		background-color: rgba(196, 132, 60, 0.16) !important;
+		border-radius: 2px;
+		color: var(--copper-bright) !important;
 	}
 
 	:global(.nav-drawer .mdc-deprecated-list-item__graphic) {
-		border-radius: 5px;
-		color: #bbb !important;
+		border-radius: 2px;
+		color: var(--mist) !important;
 	}
 
-	:global(.nav-drawer .mdc-tab:hover) {
-        background-color: rgba(187, 187, 187, 0.25);
-		border-radius: 5px;
-	}
-
-	:global(.nav-drawer .mdc-tab__icon) {
-		color: #bbb !important; /* Change active tab icon color to orange */
-	}
-
-	:global(.nav-drawer .mdc-tab__text-label) {
-		color: #bbb !important; /* Change active tab text color to orange */
-	}
-
-    :global(.nav-drawer .mdc-deprecated-list) {
-        padding: 0;
+	:global(.nav-drawer .mdc-deprecated-list) {
+		padding: 0.5rem !important;
 		border: none !important;
-    }
+	}
 
 	:global(.nav-drawer .nav-item) {
-		color: #bbb !important;
+		color: var(--mist) !important;
 	}
 
-	:global(.nav-drawer .mdc-tab:hover) {
-        background-color: rgba(187, 187, 187, 0.25);
-		border-radius: 5px;
+	:global(.nav-drawer .mdc-deprecated-list-subheader) {
+		color: var(--copper) !important;
+		font-family: var(--font-display) !important;
+		letter-spacing: 0.12em !important;
+		text-transform: uppercase !important;
+		font-size: 0.7rem !important;
 	}
 
-/* 	.nav-back {
+	.nav-back {
 		position: fixed;
-		z-index: 8;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		left: 0;
-		background-color: rgba(31, 41, 55, 0.32);
-		transition: all 0.7s;
-	} */
+		z-index: 25;
+		inset: 0;
+		background-color: rgba(12, 18, 16, 0.55);
+		transition: opacity 0.3s ease;
+	}
 </style>
 
-<Icon class="material-icons menuIcon" onclick={() => open = true} ripple={false} touch={true}>menu</Icon>
+<Icon class="material-icons menuIcon" onclick={() => (open = true)} ripple={false} touch={true}>menu</Icon>
 
 <div class="nav-back" role="button" tabindex="0" style="pointer-events: {open ? 'visible' : 'none'}; opacity: {open ? 1 : 0};" onclick={() => open = false} onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') open = false; }}></div>
 

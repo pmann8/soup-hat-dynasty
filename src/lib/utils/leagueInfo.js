@@ -7,7 +7,10 @@ export const enableBlog = false; // requires VITE_CONTENTFUL_ACCESS_TOKEN and VI
 export const enableEditor = false; // true to enable manager editor, false to disable manager editor on indiviual managers pages
 
 /*   STEP 2   */
-export const homepageText = ``;
+export const homepageText = `
+	<p>Ten managers. One absurd crest. Endless roster obsession.</p>
+	<p>This is the clubhouse for Soup Hat Dynasty — where copper trophies, long-term bets, and questionable trades all live under the same ridiculous hat.</p>
+`;
 
 /*   STEP 3   */
 /*
