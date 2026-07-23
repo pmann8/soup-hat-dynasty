@@ -40,51 +40,53 @@
         display: block;
         width: 80%;
         max-width: 800px;
-        margin: 2em auto 3em;
+        margin: 1em auto 1.5em;
     }
 
     .accuracyText {
         font-size: 0.7em;
-        color: #666;
+        color: var(--mist);
     }
 
     .disclaimer {
         font-style: italic;
-        color: #888;
+        color: var(--mist);
+        opacity: 0.85;
     }
 
     :global(.draftBoard) {
         display: block;
         width: 100%;
-        margin: 2em auto 3em;
+        margin: 1em auto 1.5em;
         overflow-x: auto;
         border: none !important;
     }
 
 	:global(.draftTeam) {
-        font-size: 0.8em;
+        font-size: 0.65em;
 		text-align: center;
-		padding: 5px 0;
+		padding: 4px 2px;
 		background-color: var(--transactHeader);
         white-space: break-spaces;
-        line-height: 1em;
-        height: 5em;
+        line-height: 1.05em;
+        height: 4.25em;
         vertical-align: initial;
 	}
 
-	:global(.draftBoard table) {        
+	:global(.draftBoard table) {
         table-layout: fixed;
         width: 100%;
-        min-width: 1200px;
+        min-width: 0;
 	}
 
     :global(.draftBoard th) {
-        border-right: 1px solid #bbb;
-        border-bottom: 1px solid #bbb;
-        height: 2em;
-        font-size: 0.8em;
+        border-right: 1px solid rgba(232, 228, 217, 0.12);
+        border-bottom: 1px solid rgba(232, 228, 217, 0.12);
+        height: 1.6em;
+        font-size: 0.7em;
         text-align: center;
-        background-color: var(--darkBlue);
+        background-color: var(--ink);
+        padding: 0.2em 0.15em !important;
     }
 
     :global(.draftBoard th:last-of-type) {
@@ -92,10 +94,15 @@
     }
 
     :global(.draftBoard td) {
-        border-right: 1px solid #bbb;
-        border-bottom: 1px solid #bbb;
-        height: 7em;
-        font-size: 0.7em;
+        border-right: 1px solid rgba(232, 228, 217, 0.12);
+        border-bottom: 1px solid rgba(232, 228, 217, 0.12);
+        height: 3.6em;
+        font-size: 0.62em;
+        padding: 0.15em !important;
+    }
+
+    :global(.draftBoard.draftBoardPrev td) {
+        height: 6.5em;
     }
 
     :global(.draftBoard td:last-of-type) {
@@ -104,10 +111,10 @@
 
 	.avatar {
 		border-radius: 50%;
-        height: 30px;
-        width: 30px;
-        margin: 0.4em 0;
-		border: 0.25px solid #777;
+        height: 22px;
+        width: 22px;
+        margin: 0.2em 0;
+		border: 0.25px solid rgba(232, 228, 217, 0.25);
 	}
 
     .clickable {
@@ -115,7 +122,7 @@
     }
 	
 	:global(.curDraftName) {
-        color: #888;
+        color: var(--mist);
         font-size: 0.7em;
         font-style: italic;
     }
@@ -131,7 +138,7 @@
     </div>
 {/if}
 
-<DataTable class="draftBoard">
+<DataTable class="draftBoard{previous ? ' draftBoardPrev' : ''}">
     <Head>
         <Row>
             {#each draftOrder as draftPosition}

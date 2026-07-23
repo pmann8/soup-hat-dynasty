@@ -1,6 +1,6 @@
 {
   "name": "league-page",
-  "version": "2.5.1",
+  "version": "3.0.0",
   "homepage": "https://github.com/nmelhado/league-page",
   "repository": {
     "type": "git",
@@ -52,7 +52,10 @@
     "prepare": "npm run smui-theme-dark",
     "smui-theme-dark": "smui-theme compile static/smui.css -i src/theme",
     "lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
-    "format": "prettier --write --plugin-search-dir=. ."
+    "format": "prettier --write --plugin-search-dir=. .",
+    "release:patch": "npm version patch -m \"chore(release): %s\"",
+    "release:minor": "npm version minor -m \"chore(release): %s\"",
+    "release:major": "npm version major -m \"chore(release): %s\""
   },
   "type": "module",
   "dependencies": {

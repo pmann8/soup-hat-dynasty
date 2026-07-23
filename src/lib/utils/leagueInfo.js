@@ -1,5 +1,5 @@
 /*   STEP 1   */
-export const leagueID = "1048291910474919936"; // your league ID
+export const leagueID = "1319070237999534080"; // your league ID
 export const leagueName = "Soup Hat Dynasty"; // your league name
 export const dues = 50; // (optional) used in template constitution page
 export const dynasty = true; // true for dynasty leagues, false for redraft and keeper
@@ -7,7 +7,10 @@ export const enableBlog = false; // requires VITE_CONTENTFUL_ACCESS_TOKEN and VI
 export const enableEditor = false; // true to enable manager editor, false to disable manager editor on indiviual managers pages
 
 /*   STEP 2   */
-export const homepageText = ``;
+export const homepageText = `
+	<p>Ten managers. One absurd crest. Endless roster obsession.</p>
+	<p>This is the clubhouse for Soup Hat Dynasty — where copper trophies, long-term bets, and questionable trades all live under the same ridiculous hat.</p>
+`;
 
 /*   STEP 3   */
 /*
@@ -253,6 +256,30 @@ export const managers = [
             image: "/managers/rival.jpg", // either a specific manager photo or '/managers/everyone.png' or '/managers/question.png'
         },
         "favoritePlayer": 6904, // (optional) this corresponds to the Sleeper player ID (https://api.sleeper.app/v1/players/nfl)
+        "valuePosition": "WR", // (optional) Favorite position (QB, WR, RB, TE, etc.)
+        "rookieOrVets": "Vets", // (optional) 'Rookies' or 'Vets' (anything else and you will need to add a new png to /static/ similar to the 'Rookies.png' and 'Vets.png' currently in there)
+        "philosophy": "Your fantasy team's philosophy",
+        "tradingScale": 10, // 1 - 10
+        "preferredContact": "Text", // 'Text', 'WhatsApp', 'Sleeper', 'Email', 'Phone', 'Discord', and 'Carrier Pigeon' are currently supplied in the template
+    },
+    {
+        "roster": 11,  // ID of the roster that the manager manages (look at the order of the power rankings graph)
+        "managerID": "603048884524093440",
+        "name": "Rocksteady212",
+        "tookOver": 2026, // (optional) used if a manager took over a team, delete this line or change to null otherwise
+        "location": "Rochester", // (optional)
+        "bio": "Lorem ipsum...",
+        "photo": "/managers/name.jpg", // square ratio recommended (no larger than 500x500)
+        "fantasyStart": 2026, // (optional) when did the manager start playing fantasy football
+        "favoriteTeam": "buf", // (optional) favorite NFL team, (follows convention: nyj, sea, mia, etc.) MUST BE LOWERCASE
+        "mode": "Rebuild", // (optional) 'Win Now', 'Dynasty', or 'Rebuild' (anything else and you will need to add a new png to /static/ similar to the 'Rebuild.png' and 'Win Now.png' currently in there)
+        "rival":
+        {
+            name: "Rival", // Can be anything (usually your rival's name)
+            link: 6, // manager array number within this array, or null to link back to all managers page
+            image: "/managers/rival.jpg", // either a specific manager photo or '/managers/everyone.png' or '/managers/question.png'
+        },
+        "favoritePlayer": 4984, // (optional) this corresponds to the Sleeper player ID (https://api.sleeper.app/v1/players/nfl)
         "valuePosition": "WR", // (optional) Favorite position (QB, WR, RB, TE, etc.)
         "rookieOrVets": "Vets", // (optional) 'Rookies' or 'Vets' (anything else and you will need to add a new png to /static/ similar to the 'Rookies.png' and 'Vets.png' currently in there)
         "philosophy": "Your fantasy team's philosophy",

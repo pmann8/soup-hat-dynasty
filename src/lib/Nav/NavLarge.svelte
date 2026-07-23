@@ -3,144 +3,287 @@
 	import Tab, { Icon, Label } from '@smui/tab';
 	import List, { Item, Graphic, Text, Separator } from '@smui/list';
 	import TabBar from '@smui/tab-bar';
-    import { page } from '$app/state';
-	import { goto, preloadData } from '$app/navigation';
+	import { page } from '$app/state';
+	import { afterNavigate, goto, preloadData } from '$app/navigation';
 	import { enableBlog, managers } from '$lib/utils/leagueInfo';
 
-	let active = $state(tabs.find(tab => tab.dest == page.url.pathname || (tab.nest && tab.children.find(subTab => subTab.dest == page.url.pathname))));
+	const nestTab = tabs.find((tab) => tab.nest);
+	const tabChildren = (nestTab?.children ?? []).filter(
+		(subTab) => subTab.label != 'Managers' || managers.length > 0
+	);
 
+	const findActiveTab = (pathname) =>
+		tabs.find(
+			(tab) =>
+				tab.dest == pathname ||
+				(tab.nest && tab.children.some((subTab) => subTab.dest == pathname))
+		) ?? tabs[0];
+
+	let active = $state(findActiveTab(page.url.pathname));
 	let display = $state(false);
-	let el = $state();
-	let width = $state();
-	let height= $state();
-	let left = $state();
-	let top = $state();
+	let triggerEl = $state();
+	let menuTop = $state(0);
+	let menuLeft = $state(0);
 
-	$effect(() => {
-		top = el?.getBoundingClientRect() ? el?.getBoundingClientRect().top  : 0;
-		const bottom = el?.getBoundingClientRect() ? el?.getBoundingClientRect().bottom  : 0;
-
-		height = bottom - top + 1;
-
-		left = el?.getBoundingClientRect() ? el?.getBoundingClientRect().left  : 0;
-		const right = el?.getBoundingClientRect() ? el?.getBoundingClientRect().right  : 0;
-
-		width = right - left;
+	afterNavigate(() => {
+		active = findActiveTab(page.url.pathname);
+		display = false;
 	});
 
-	let innerWidth = $state();
+	const placeMenu = () => {
+		const rect = triggerEl?.getBoundingClientRect();
+		if (!rect) return;
+		menuTop = rect.bottom + 4;
+		menuLeft = rect.left;
+	};
 
-	const open = () => {
-		display = !display;
-	}
+	const toggleMenu = (event) => {
+		event?.stopPropagation?.();
+		event?.preventDefault?.();
+		if (display) {
+			display = false;
+			active = findActiveTab(page.url.pathname);
+			return;
+		}
+		placeMenu();
+		display = true;
+		if (nestTab) active = nestTab;
+	};
+
+	const closeMenu = () => {
+		display = false;
+		active = findActiveTab(page.url.pathname);
+	};
 
 	const subGoto = (dest) => {
-		open(false);
+		display = false;
 		if (dest.startsWith('http')) {
 			window.open(dest, '_blank');
 		} else {
 			goto(dest);
 		}
-	}
-
-	let tabChildren = $state([]);
-
-	for(const tab of tabs) {
-		if(tab.nest) {
-			tabChildren = tab.children;
-		}
-	}
-
+	};
 </script>
 
-<svelte:window bind:innerWidth={innerWidth} />
+<svelte:window
+	onresize={() => {
+		if (display) placeMenu();
+	}}
+	onscroll={() => {
+		if (display) placeMenu();
+	}}
+/>
 
 <style>
-    :global(.parent .navBar) {
-        display: inline-flex;
-        position: relative;
-        justify-content: center;
-    }
+	:global(.parent .navBar) {
+		display: inline-flex;
+		position: relative;
+		justify-content: center;
+		overflow: visible !important;
+	}
 
-    :global(.navBar .material-icons) {
-        font-size: 1.8em;
-        height: 25px;
-        width: 22px;
-    }
+	:global(.navBar .mdc-tab-scroller),
+	:global(.navBar .mdc-tab-scroller__scroll-area),
+	:global(.navBar .mdc-tab-scroller__scroll-content) {
+		overflow: visible !important;
+	}
 
-    :global(.navBar .mdc-tab--active) {
-        background-color: var(--darkBlue) !important; /* Change active tab background color */
-		border-radius: 5px;
+	:global(.navBar .material-icons) {
+		font-size: 1.15em;
+		height: 20px;
+		width: 18px;
+	}
+
+	:global(.navBar .mdc-tab) {
+		height: 44px !important;
+		padding: 0 0.65rem !important;
+	}
+
+	:global(.navBar .mdc-tab--active) {
+		background-color: rgba(196, 132, 60, 0.16) !important;
+		border-radius: 2px;
 	}
 
 	:global(.navBar .mdc-tab:hover) {
-        background-color: rgba(187, 187, 187, 0.25);
-		border-radius: 5px;
+		background-color: rgba(232, 228, 217, 0.08);
+		border-radius: 2px;
+	}
+
+	:global(.navBar .mdc-tab__content) {
+		flex-direction: row !important;
+		align-items: center !important;
+		gap: 0.35rem;
 	}
 
 	:global(.navBar .mdc-tab__icon) {
-		color: #bbb !important; /* Change active tab icon color to orange */
+		color: var(--mist) !important;
+		margin: 0 !important;
+	}
+
+	:global(.navBar .mdc-tab--active .mdc-tab__icon),
+	:global(.navBar .mdc-tab--active .mdc-tab__text-label) {
+		color: var(--copper-bright) !important;
 	}
 
 	:global(.navBar .mdc-tab__text-label) {
-		color: #bbb !important; /* Change active tab text color to orange */
+		color: var(--mist) !important;
+		font-family: var(--font-body) !important;
+		font-weight: 600 !important;
+		font-size: 0.82rem !important;
+		letter-spacing: 0.02em !important;
+		text-transform: none !important;
 	}
 
-    .parent {
-        position: relative;
-    }
-
-    .subMenu {
-		overflow-y: hidden;
-		display: block;
-		position: absolute;
-		z-index: 5;
-		background-color: var(--darkBlue);
-		transition: all 0.4s;
-		border-bottom-left-radius: 5px;
-		border-bottom-right-radius: 5px;
+	:global(.navBar .mdc-tab-indicator .mdc-tab-indicator__content--underline) {
+		border-color: var(--copper) !important;
 	}
 
-    .overlay {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        height: 100vh;
-        z-index: 4;
-    }
+	.parent {
+		position: relative;
+		z-index: 6;
+	}
 
-    :global(.navBar .mdc-deprecated-list) {
-        padding: 0;
+	.nest-wrap {
+		display: inline-flex;
+		align-items: stretch;
+	}
+
+	.nest-hit {
+		display: inline-flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+		min-width: 5rem;
+		height: 44px;
+		padding: 0 0.65rem;
+		border: none;
+		background: transparent;
+		color: var(--mist);
+		cursor: pointer;
+		font-family: var(--font-body);
+		font-weight: 600;
+		font-size: 0.82rem;
+		letter-spacing: 0.02em;
+		border-radius: 2px;
+		line-height: 1;
+	}
+
+	.nest-hit:hover {
+		background: rgba(232, 228, 217, 0.08);
+	}
+
+	.nest-hit.open {
+		background: rgba(196, 132, 60, 0.16);
+		color: var(--copper-bright);
+	}
+
+	.nest-icon {
+		font-size: 1.1em;
+		line-height: 1;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 1em;
+		height: 1em;
+		margin: 0;
+		padding: 0;
+		transform: translateY(0px);
+	}
+
+	.nest-label {
+		line-height: 1;
+		display: inline-block;
+		transform: translateY(0);
+	}
+
+	.overlay {
+		position: fixed;
+		inset: 0;
+		z-index: 40;
+		background: transparent;
+	}
+
+	.subMenu {
+		position: fixed;
+		z-index: 50;
+		min-width: 12rem;
+		background-color: var(--panel);
+		border: 1px solid rgba(232, 228, 217, 0.14);
+		border-radius: 2px;
+		box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+	}
+
+	:global(.subMenu .mdc-deprecated-list) {
+		padding: 0;
 		border: none !important;
-    }
+		background: transparent !important;
+	}
 
-    :global(.navBar .subText) {
-        font-size: 0.8em;
-    }
+	:global(.subMenu .mdc-deprecated-list-item) {
+		color: var(--chalk) !important;
+	}
 
-    :global(.navBar .dontDisplay) {
-        display: none;
-    }
+	:global(.subMenu .mdc-deprecated-list-item:hover) {
+		background: rgba(196, 132, 60, 0.12) !important;
+	}
+
+	:global(.subMenu .subText) {
+		font-size: 0.85em;
+		font-family: var(--font-body);
+	}
+
+	:global(.navBar .dontDisplay) {
+		display: none;
+	}
 </style>
 
-<div tabindex="0" role="button" class="overlay" style="display: {display ? "block" : "none"};" onclick={() => open(true)}></div>
+{#if display}
+	<div class="overlay" role="presentation" onmousedown={closeMenu}></div>
+	<div
+		class="subMenu"
+		style="top: {menuTop}px; left: {menuLeft}px;"
+		onmousedown={(e) => e.stopPropagation()}
+	>
+		<List>
+			{#each tabChildren as subTab, ix}
+				<Item
+					onSMUIAction={() => subGoto(subTab.dest)}
+					ontouchstart={() => {
+						if (subTab.label != 'Go to Sleeper') preloadData(subTab.dest);
+					}}
+					onmouseover={() => {
+						if (subTab.label != 'Go to Sleeper') preloadData(subTab.dest);
+					}}
+				>
+					<Graphic class="material-icons">{subTab.icon}</Graphic>
+					<Text class="subText">{subTab.label}</Text>
+				</Item>
+				{#if ix != tabChildren.length - 1}
+					<Separator />
+				{/if}
+			{/each}
+		</List>
+	</div>
+{/if}
 
 <div class="parent">
 	<TabBar class="navBar" {tabs} key={(tab) => tab.key} bind:active>
 		{#snippet tab(tab)}
 			{#if tab.nest}
-				<div bind:this={el}>
-					<Tab
-						{tab}
-						minWidth
-						onclick={() => open()}
+				<div class="nest-wrap">
+					<button
+						type="button"
+						class="nest-hit"
+						class:open={display}
+						bind:this={triggerEl}
+						aria-expanded={display}
+						aria-haspopup="true"
+						onclick={toggleMenu}
 					>
-						<Icon class="material-icons">{tab.icon}</Icon>
-						<Label class="label mdc-tab__text-label">{tab.label}</Label>
-					</Tab>
+						<span class="material-icons nest-icon" aria-hidden="true">{tab.icon}</span>
+						<span class="nest-label">{tab.label}</span>
+					</button>
 				</div>
 			{:else}
 				<Tab
@@ -157,27 +300,4 @@
 			{/if}
 		{/snippet}
 	</TabBar>
-	<div class="subMenu" style="max-height: {display ? 49 * tabChildren.length - 1 - (managers.length ? 0 : 48) : 0}px; width: {width}px; top: {height}px; left: {left}px; box-shadow: 0 0 {display ? "3px" : "0"} 0 #1f2937; border-top: {display ? "0px" : "0"} solid #1f2937;">		
-		<List>
-			{#each tabChildren as subTab, ix}
-				{#if subTab.label == 'Managers'}
-					<Item class="{managers.length ? '' : 'dontDisplay'}" onSMUIAction={() => subGoto(subTab.dest)} ontouchstart={() => preloadData(subTab.dest)} onmouseover={() => preloadData(subTab.dest)}>
-						<Graphic class="material-icons">{subTab.icon}</Graphic>
-						<Text class="subText">{subTab.label}</Text>
-					</Item>
-					{#if ix != tabChildren.length - 1}
-						<Separator />
-					{/if}
-				{:else}
-					<Item onSMUIAction={() => subGoto(subTab.dest)} ontouchstart={() => {if(subTab.label != 'Go to Sleeper') preloadData(subTab.dest)}} onmouseover={() => {if(subTab.label != 'Go to Sleeper') preloadData(subTab.dest)}}>
-						<Graphic class="material-icons">{subTab.icon}</Graphic>
-						<Text class="subText">{subTab.label}</Text>
-					</Item>
-					{#if ix != tabChildren.length - 1}
-						<Separator />
-					{/if}
-				{/if}
-			{/each}
-		</List>
-	</div>
 </div>

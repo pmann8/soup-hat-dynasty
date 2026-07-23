@@ -1,257 +1,257 @@
-<div align="center">
-  <img alt="League Page logo" src="https://storage.googleapis.com/nfl-player-data/League%20Page.png" width="100px" />
+# Training Wheels — Soup Hat Dynasty
 
-  **[(Unofficial) Sleeper League Page Template](https://github.com/nmelhado/league-page/)**
+Step-by-step guide for editing this league site. Keep it open while you make changes.
 
+**Live site:** [soup-hat-dynasty.vercel.app](https://soup-hat-dynasty.vercel.app/)  
+**Repo:** [pmann8/soup-hat-dynasty](https://github.com/pmann8/soup-hat-dynasty)  
+**Reference:** [README.md](./README.md) (full config tables)
 
-Generate a custom league page for your Sleeper fantasy football league in just a few steps
-  <br />
+This project is already forked from [League Page](https://github.com/nmelhado/league-page) and deployed on Vercel. You do **not** need to fork or create a new Vercel project.
 
-  ![GitHub](https://img.shields.io/github/license/nmelhado/league-page) [![node](https://img.shields.io/badge/node-%3E%3D14-brightgreen)](https://github.com/nmelhado/league-page) ![GitHub top language](https://img.shields.io/github/languages/top/nmelhado/league-page?color=ff3e00) ![Lines of code](https://img.shields.io/tokei/lines/github/nmelhado/league-page?label=lines%20of%20code) ![GitHub forks](https://img.shields.io/github/forks/nmelhado/league-page) ![GitHub pull requests](https://img.shields.io/github/issues-pr/nmelhado/league-page) ![GitHub issues](https://img.shields.io/github/issues-raw/nmelhado/league-page)
-</div>
+---
 
-<div align="center">
-  <h1>Training Wheels Instructions</h1>
-  <span>Keep this open in a separate tab, to make setup as easy as possible</span>
-</div>
+## I. How changes get to the live site
 
-## I. Initial Setup
+1. Edit files in this repo (locally or on GitHub).
+2. Commit and push to the branch Vercel deploys (usually `main` or `souphat`).
+3. Wait for the Vercel build to finish, then refresh the live site.
 
-### 1. Fork This Repo to Your GitHub Account
-- If you don't already have a Github account, [make a free account](https://github.com/join)
-- Go to [League Page (https://github.com/nmelhado/league-page)](https://github.com/nmelhado/league-page)
-- Click on the Fork button
-> ![Fork](https://storage.googleapis.com/nfl-player-data/fork.png)
+For local preview before pushing:
 
-<br />
+```bash
+npm install
+npm run dev
+```
 
-- You now have your own League Page!
+Requires Node `>=20`. Details in the [README](./README.md#local-development).
 
-### 2. Configure your League
-- In your league page, go to `/src/lib/utils/leagueInfo.js`
-> ![src](https://storage.googleapis.com/nfl-player-data/src.png)
-![lib](https://storage.googleapis.com/nfl-player-data/lib.png)
-![utils](https://storage.googleapis.com/nfl-player-data/utils.png)
-![leagueInfo](https://storage.googleapis.com/nfl-player-data/leagueInfo.png)
+---
 
-<br />
+## II. League settings
 
-- Click the edit button
-> ![editLeagueData](https://storage.googleapis.com/nfl-player-data/editLeagueData.png)
+Open [`src/lib/utils/leagueInfo.js`](./src/lib/utils/leagueInfo.js).
 
-<br />
+### Core fields (top of the file)
 
-- Replace `your_league_name` and `your_league_id` with your Sleeper league name and ID *[(how to find your league ID)](https://support.sleeper.app/en/articles/4121798-how-do-i-find-my-league-id#:~:text=Go%20toward%20the%20bottom%20of,email%20support%40sleeper.app.)* :
-> ![league ID instructions](https://storage.googleapis.com/nfl-player-data/editLeagueID.jpg)
-- Scroll down to the bottom of the page and commit your changes
-> ![Commit your changes](https://storage.googleapis.com/nfl-player-data/commitLeagueID.png)
+| Field | What to set |
+| --- | --- |
+| `leagueID` | Current Sleeper league ID. [How to find it](https://support.sleeper.app/en/articles/4121798-how-do-i-find-my-league-id). |
+| `leagueName` | `"Soup Hat Dynasty"` (or whatever you want shown in titles). |
+| `dues` | League dues in dollars (used by the constitution page). |
+| `dynasty` | Keep `true` for this dynasty league. |
+| `enableBlog` | `true` only after Contentful is set up (see [§ V](#v-add-a-blog)). |
+| `enableEditor` | `true` to show the manager editor UI on manager pages. |
 
-<br />
+### New season rollover
 
-- Your league has been configured!
-### 3. Deploy your League Page
-- Go to Vercel, and [sign up using your GitHub account](https://vercel.com/signup)
-- Now link your Github account to your Vercel account
-> ![Link GitHub account](https://storage.googleapis.com/nfl-player-data/linkAccounts.png)
+When Sleeper creates a new season league:
 
-<br />
+1. Copy the new league ID from Sleeper.
+2. Update `leagueID` in `leagueInfo.js`.
+3. Commit, push, and wait for deploy.
 
-- `Import` League Page
-> ![import league page](https://storage.googleapis.com/nfl-player-data/importLeaguePage.png)
+Past seasons stay available through Sleeper’s `previous_league_id` chain — you only need the **current** ID.
 
-<br />
+---
 
-- Skip the Create a Team step
-- Leave all setting as they are, and click `Deploy`
-> ![deploy](https://storage.googleapis.com/nfl-player-data/deploy.png)
+## III. Homepage text
 
-<br />
+Still in [`src/lib/utils/leagueInfo.js`](./src/lib/utils/leagueInfo.js), find `homepageText`.
 
-- Wait for Vercel to deploy your League Page (should take about a minute)
-- Click on `Go to Dashboard`
-- Now click on `Visit` to visit your page (and then keep your league website open in that tab)
-- You have officially built a website!
+- Each `<p>...</p>` becomes one paragraph on the home page.
+- Add paragraphs by copying a `<p>` line; remove paragraphs by deleting a line.
+- Use plain HTML only (no Markdown).
 
-## II. Adding Managers and Changing the Homepage Text
+Example:
 
-### 1. Now that you have a league website, it's time to personalize your homepage
-- Go back to GitHub, and scroll back to the top of `/src/lib/utils/leagueInfo.js`
-- Click edit
-> ![edit index](https://storage.googleapis.com/nfl-player-data/editLeagueData.png)
+```js
+export const homepageText = `
+	<p>Ten managers. One absurd crest. Endless roster obsession.</p>
+	<p>This is the clubhouse for Soup Hat Dynasty.</p>
+`;
+```
 
-<br />
+Commit, push, wait for Vercel, then refresh the live site.
 
-- Scroll down to lines 9-14
-> ![scroll down](https://storage.googleapis.com/nfl-player-data/scrollDown.png)
+---
 
-<br />
+## IV. Managers
 
-- Each line (which is sandwiched by a `<p>` and a `</p>`) creates a new paragraph on your homepage. Replace those paragraphs with the text you want to use to introduce your league
-- If you want fewer paragraphs, delete one of the lines. If you want more, copy a line and paste it below the last `<p>...</p>` in this area
-> ![example text](https://storage.googleapis.com/nfl-player-data/exampleText.png)
+Managers are the `managers` array in [`src/lib/utils/leagueInfo.js`](./src/lib/utils/leagueInfo.js). One object per manager.
 
-<br />
+### Finding a manager’s Sleeper ID
 
-- Scroll down to the bottom of the page when you're done and `Commit changes`
-- Now go back to your league website, wait a minute or two, and then refresh!
-> ![text preview](https://storage.googleapis.com/nfl-player-data/textRendered.png)
+Open (replace with the current league ID if it changed):
 
+`https://api.sleeper.app/v1/league/1319070237999534080/users`
 
-### 2. Add Managers
-- You now have a functioning website, with a personalized homepage. But you're missing one of League Page's best features, Managers!
-- Go back to GitHub and scroll back up to the top of `/src/lib/utils/leagueInfo.js`
-- Click the edit button
-- Highlight lines 27-92
-> ![highlight](https://storage.googleapis.com/nfl-player-data/highlight.png)
+Find the manager’s `user_id` and use it as `managerID` (in quotes):
 
-<br />
+```js
+"managerID": "474795970639425536",
+```
 
-- On Mac, click: `⌘ Command` + `/`, on Windows, click: `Ctrl` + `/`. This will remove the `// ` or, in coding terminology, `uncomment` these lines, so the code should now look like this:
-> ![uncomment](https://storage.googleapis.com/nfl-player-data/uncomment.png)
+`roster` and `tookOver` are deprecated if you provide `managerID`. You can leave them or set `tookOver` to `null`.
 
-<br />
+### Field checklist
 
-- Each `object` (shown highlighted below) corresponds to one manager
-> ![single manager](https://storage.googleapis.com/nfl-player-data/singleManager.png)
+| Field | Notes |
+| --- | --- |
+| `managerID` | Required. Sleeper user ID (see above). |
+| `name` | Display name. |
+| `bio` | Short bio; placeholder is fine until you have real copy. |
+| `photo` | Path like `"/managers/der32.jpg"` — must match a file under `static/managers/`. Square, ≤500×500 recommended. |
+| `location` | Optional city / region. |
+| `fantasyStart` | Optional year they started fantasy. |
+| `favoriteTeam` | Lowercase NFL abbrev: `"buf"`, `"nyg"`, `"phi"`, etc. |
+| `mode` | `"Win Now"`, `"Dynasty"`, or `"Rebuild"`. |
+| `rival` | Nested `{ name, link, image }` — see below. |
+| `favoritePlayer` | Sleeper player ID (see below). |
+| `valuePosition` | `"QB"`, `"WR"`, `"RB"`, `"TE"`, etc. |
+| `rookieOrVets` | `"Rookies"` or `"Vets"` (note the spelling: `rookieOrVets`). |
+| `philosophy` | Team-building blurb. |
+| `tradingScale` | Number `1`–`10`. |
+| `preferredContact` | `"Text"`, `"WhatsApp"`, `"Sleeper"`, `"Email"`, `"Phone"`, `"Discord"`, or `"Carrier Pigeon"`. |
 
-<br />
+Leave the commented “source of truth” manager object at the **bottom** of `leagueInfo.js` alone — it helps with future upstream merges.
 
-- Fill each one out as follows:
-    - `"roster" :` **This has been deprecated! You can ignore this field as long as you provide a managerID**
-        - ~~To find the roster ID for the manager, go back to your website and scroll down to the `Power Rankings` graph (or to any of the graphs in your records page)~~ (Power Rankings are no longer in order)
-    - `"managerID" :` the user ID of the manager
-        - To find a manager's user ID, go to `https://api.sleeper.app/v1/league/<your_league_id/users` (for example: https://api.sleeper.app/v1/league/784583295500464128/users) and find the corresponding userID for each manager
-        - This feld was added in version 2.1.0, so you will have to add it manually. Remember when adding it, to place the id within quotes (i.e. `"managerID" : "12345678",`)
-    - `"name" :` The name of this manager
-    - `"tookOver" :` **This has been deprecated! You can ignore this field as long as you provide a managerID**
-        - If this manager took over an orphaned team in your league, give the year they took over. Otherwise set this to `null`
-    - `"location" :` Where is this manager based out of (City, State, Country, whatever floats your boat)
-    - `"bio" :` This manager's bio. If you don't have a bio yet, leave it as is and come back and edit this again when you have the bio.
-    - `"photo" :` This manager's photo. To upload a photo:
-        - Open up your repo's root in a new tab
-        > ![newTab](https://storage.googleapis.com/nfl-player-data/newTab.png)
+### Rival object
 
-        <br />
+```js
+"rival": {
+  name: "pmann8",   // display name (or "Everyone", "Nobody", etc.)
+  link: 9,          // 0-based index of that manager in the managers array
+  image: "/managers/rival.jpg",
+},
+```
 
-        - Got to `/static/managers/`
-        > ![static](https://storage.googleapis.com/nfl-player-data/static.png)
-        ![managersDir](https://storage.googleapis.com/nfl-player-data/managersDir.png)
+- First manager in the array → `link: 0`
+- Second → `link: 1`
+- Rival is everyone / nobody → `link: null`
+- Rival is themselves → use their own index
 
-        <br />
+### Favorite player ID
 
-        - Click on `Add file` then `Upload files`
-        > ![managersDir](https://storage.googleapis.com/nfl-player-data/upload.png)
+1. Open [https://api.sleeper.app/v1/players/nfl](https://api.sleeper.app/v1/players/nfl) (large JSON file).
+2. Search (`Ctrl`/`⌘` + `F`) for the player name.
+3. Copy their `player_id` number into `favoritePlayer` (e.g. `4984`).
 
-        <br />
+### Uploading manager photos
 
-        - Add one or all of the manager photos
-        - When you're done, click `Commit changes` at the bottom of the page
-        - Back in `/src/routes/managers/managers.js` tab, use the filename (please note that this IS case sensitive) to fill out the photo field. For the below file, you would fill out `"photo" : "/managers/nick.jpg",`
-        > ![managersDir](https://storage.googleapis.com/nfl-player-data/nickExample.png)
-    - `"fantasyStart" :` what year did the manager start playing fantasy
-    - `"favoriteTeam" :` supply the lowercase shorthand for a manager's favorite NFL team (i.e. `"nyj"`, `"cle"`, `"sf"`, `"ne"`, etc.)
-    - `"mode" :` There are three options currently: `"Win Now"`, `"Dynasty"`, or `"Rebuild"`
-    - `"rival" :` This has a nested object that should be filled out as follows:
-        - `"name" :` The name of this manager's rival (can also be themselves, everyone, or nobody)
-        - `"link" :` This corresponds to the other managers on this list. 
-            - If the manager's rival is the first manager you created in this list, you would supply `0`, if their rival is the second manager, you would supply `1`, if it's the 10th manager, you would supply `9`, etc.
-            - If the rival is nobody or everyone, then supply `null`
-            - If the rival is themselves, and they are the third manager in this list, supply `2`
-        - `"image" :` Fill this out the same way you did for the manger photo above (you can upload and use specific rival photos if you want) 
-    - `"favoritePlayer" :` This is possibly the trickiest step
-        - Go to [https://api.sleeper.app/v1/players/nfl](https://api.sleeper.app/v1/players/nfl) in a new tab
-        - Use `⌘ Command` + `F` (on Mac), or `Ctrl` + `F` on Windows to search for the player you are looking for and then copy down that player's `player_id`
-        > ![player selection](https://storage.googleapis.com/nfl-player-data/playerSelection.jpg)
-        <br />
+1. Go to [`static/managers/`](./static/managers/) in the repo.
+2. Upload the image (GitHub: **Add file → Upload files**, or commit locally).
+3. Set `photo` to `"/managers/<exact-filename>"` — case-sensitive.
 
-        - Supply that number (i.e. `1426`)
-    - `"favoritePlayer" :` This is possibly the trickiest step.
-    - `"valuePosition" :` Does the manager prefer `"WR"`, `"RB"`, `"QB"`, `"TE"`, etc. for fantasy
-    - `"rookiesOrVets" :` Two options, does the manager prefer `"Rookies"` or `"Vets"`
-    - `"philosophy" :` The fantasy manager's fantasy football philosophy
-    - `"tradingScale" :` a number 1-10 representing how much the manager likes to trade
-    - `"preferredContact" :` `"Text"`, `"WhatsApp"`, and `"Carrier Pigeon"` are the only options supplied by default
+### After editing managers
 
-- You have finished your first manager! Now repeat the process for each manager in your league. Here's [an example](https://github.com/nmelhado2/league-page/blob/master/src/routes/managers/managers.js) of a finished 12 team `managers.js`
-- When you're done, scroll down and click `Commit changes`
-- Go back to your league website tab, wait a minute or two, and then refresh. Now you'll have a Managers tab (located in `LEAGUE INFO` on desktop)
-- Click on `Managers` and you'll see all the managers you just added!
+Commit, push, wait for deploy, then open **League Info → Managers** on the live site.
 
-> ![managers preview](https://storage.googleapis.com/nfl-player-data/managersRendered.png)
+---
 
-## III. Add a Blog
+## V. Add a blog
 
-- Add blog capabilities to your League Page with [contenful](https://contentful.com/)
-    - [Make a free contentful account](https://www.contentful.com/sign-up/)
-    - Click on `Content model` in the top bar and create Blog Post (id: `blog_post`) and Blog Comment (id: `blog_comment`) content models that matches the specs below **(All fields are required)**:
-    ![content model](https://storage.googleapis.com/nfl-player-data/contentModel.jpg)
-    ![comment model](https://storage.googleapis.com/nfl-player-data/commentModel.jpg)
-        - Use sleeper your sleeper username for the author field when creating posts
-    - Copy your `Space ID`
-    ![Space ID](https://storage.googleapis.com/nfl-player-data/getSpaceID.jpg)
-    - Create a Content Management API key and copy down the value
-    ![API key settings](https://storage.googleapis.com/nfl-player-data/apiKeySettings.jpg)
-    ![add Content Management API key](https://storage.googleapis.com/nfl-player-data/addApiKey.jpg)
-    ![API key](https://storage.googleapis.com/nfl-player-data/generatePersonalToken.jpg)
-    ![API key](https://storage.googleapis.com/nfl-player-data/generate.jpg)
-    ![API key](https://storage.googleapis.com/nfl-player-data/copyPersonalToken.jpg)
-    - Create a Content Delivery / Preview API key and copy down the `Content Delivery API - access token` value
-    ![API key settings](https://storage.googleapis.com/nfl-player-data/apiKeySettings.jpg)
-    ![add Content Delivery / Preview API API key](https://storage.googleapis.com/nfl-player-data/content-delivery-step-1-min.jpg)
-    ![Copy](https://storage.googleapis.com/nfl-player-data/content-delivery-step-2-min.jpg)
-    - Now, go back to Vercel go to your project settings
-    ![project settings](https://storage.googleapis.com/nfl-player-data/projectSettings.jpg)
-    - Go to the environment variables section
-    ![environment variables](https://storage.googleapis.com/nfl-player-data/envVariables.jpg)
-    - Add the values using the following names
-        - name: `VITE_CONTENTFUL_SPACE` value: `Space ID (from contentful)`
-        - name: `VITE_CONTENTFUL_ACCESS_TOKEN` value: `Content Management API - access token (from contentful)`
-        - name: `VITE_CONTENTFUL_CLIENT_ACCESS_TOKEN` value: `Content Delivery API - access token (from contentful)`
-    ![contentful space](https://storage.googleapis.com/nfl-player-data/contentfulSpace.jpg)
-    ![contentful API token](https://storage.googleapis.com/nfl-player-data/contentfulAPIKey.jpg)
-    ![contentful delivery API token](https://storage.googleapis.com/nfl-player-data/vercel%20step%203-min.jpg)
-    - Go back to GitHub and scroll back up to the top of `/src/lib/utils/leagueInfo.js`
-    - Click the edit button and set `enableBlog` to true
-    - Scroll down and click `Commit changes`
+Blog support is optional and currently off (`enableBlog = false`). It uses [Contentful](https://contentful.com/).
 
-## IV. Updates
+### 1. Contentful setup
 
-- League Page is constantly being updated and improved. Check back on your repo periodically and whenever you see the `fetch update` button, click `fetch update` and commit the changes to get the upgrades
-> ![fetch upstream](https://storage.googleapis.com/nfl-player-data/fetchUpstream.jpg)
+1. [Create a free Contentful account](https://www.contentful.com/sign-up/).
+2. Under **Content model**, create:
+   - **Blog Post** with id `blog_post`
+   - **Blog Comment** with id `blog_comment`
+3. Match the field specs from the upstream screenshots:
+   - [Blog post model](https://storage.googleapis.com/nfl-player-data/contentModel.jpg)
+   - [Blog comment model](https://storage.googleapis.com/nfl-player-data/commentModel.jpg)
+4. When writing posts, set **author** to the author’s **Sleeper username**.
 
-<br />
+### 2. API keys
 
-- Another way to know there's an update available is if you see the following notification on your League Page:
-    > ![update notification](https://storage.googleapis.com/nfl-player-data/updateNotification.jpg)
-    
-    <br />
+Copy these from Contentful:
 
-    - To see what's changed in the newest updates (bugs fixed, features added, etc.), check the [CHANGELOG](https://github.com/nmelhado/league-page/blob/master/CHANGELOG.md)
+| What | Where in Contentful |
+| --- | --- |
+| Space ID | Space settings |
+| Content Management API token | API keys → personal / management token |
+| Content Delivery API token | API keys → Content delivery / preview |
 
-    <br />
+### 3. Environment variables
 
-    - **If you first created your league before August 7th, 2021**, you may encounter `merge conflicts` when trying to fetch upstream.
-        - In that situation (if you are new to coding), copy the contents of your managers page and your homepage text and delete your repo. Re-follow this guide and re-deploy your page.
-        - There should be **NO merge conflicts going forward**.
+In [Vercel project settings → Environment Variables](https://vercel.com/pmann8/soup-hat-dynasty/settings/environment-variables) (and in a local `.env` for `npm run dev`):
 
-    - **WARNING:** There may be merge conflicts in `package-lock.json`. *This should be very rare.*
-        - Follow these instructions to [resolve the conflict](https://docs.github.com/en/github/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github). For the most part, you'll most likely want to keep the changes from master (the second change)
+| Name | Value |
+| --- | --- |
+| `VITE_CONTENTFUL_SPACE` | Space ID |
+| `VITE_CONTENTFUL_ACCESS_TOKEN` | Management API token |
+| `VITE_CONTENTFUL_CLIENT_ACCESS_TOKEN` | Delivery API token |
 
+Redeploy after adding env vars.
 
-## V. Wrapping up
+### 4. Turn the blog on in code
 
-- That's it. You've built out your own league website!
-- If you want to replace the league page logo with your league's own logo, replece `static/badge.png` with your own 120px x 120px png file (using the same name)
-- If you want to add analytics, go to the [Analytics page in Vercel](https://vercel.com/d?to=%2F%5Bteam%5D%2F%5Bproject%5D%2Fanalytics&title=Open+Web+Analytics) and turn them on! They will start tracking after the next deployment.
-- If  you want to delve further, you can also edit your league constitution page `/src/routes/constitution/+page.svelte`
-    - This page is primarily HTML, so you can edit this in a similar way to how you edited the homepage
-- If you and your league like League Page, please consider <b><a href="https://www.buymeacoffee.com/nmelhado" target="_blank">donating</a></b> (and encouraging your league-mates to too!)
-<div align="center">
-    <a href="https://www.buymeacoffee.com/nmelhado" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-green.png" alt="Buy Me A Coffee" style="height: 60px !important; width: 217px !important;" width="217px" height="60px" ></a>
-</div>
+1. In `leagueInfo.js`, set `enableBlog` to `true`.
+2. In [`src/lib/utils/tabs.js`](./src/lib/utils/tabs.js), uncomment the Blog tab.
+3. Commit and push.
 
-- **If you run into any issues**, go back to [the original League Page repo](https://github.com/nmelhado/league-page) and open an [issue](https://github.com/nmelhado/league-page/issues/new?assignees=nmelhado&labels=bug&template=bug_report.md&title=%5BBUG%5D)
-- **If you have any recommendations**, go back to [the original League Page repo](https://github.com/nmelhado/league-page) and open a [feature request](https://github.com/nmelhado/league-page/issues/new?assignees=nmelhado&labels=enhancement&template=feature_request.md&title=%5BENHANCEMENT%5D)
+---
 
-<br>
-<br>
+## VI. Navigation, constitution, and branding
+
+### Navigation
+
+[`src/lib/utils/tabs.js`](./src/lib/utils/tabs.js) controls the top nav and mobile drawer.
+
+- Comment out a tab to hide it.
+- Blog and Constitution are commented out by default in this repo.
+- “Go to Sleeper” uses `leagueID` automatically.
+
+### Constitution
+
+Edit [`src/routes/constitution/+page.svelte`](./src/routes/constitution/+page.svelte).
+
+- Mostly HTML — same idea as homepage text.
+- `{dues}` pulls from `leagueInfo.js` for dues / payout amounts.
+- Uncomment the Constitution item in `tabs.js` to link it in the nav.
+
+### Branding
+
+| Asset | Path |
+| --- | --- |
+| League badge / logo | [`static/badge.png`](./static/badge.png) (ideally ~120×120 PNG) |
+| Hero image | [`static/hero.jpg`](./static/hero.jpg) |
+| App name / theme color | [`src/app.html`](./src/app.html), [`static/manifest.json`](./static/manifest.json) |
+| Favicons / PWA | [`static/favicons/`](./static/favicons/), [`static/pwa/`](./static/pwa/) |
+
+### Analytics
+
+Optional: enable [Vercel Analytics](https://vercel.com/pmann8/soup-hat-dynasty/analytics). Tracking starts after the next deploy.
+
+---
+
+## VII. Pulling upstream League Page updates
+
+This site is based on [nmelhado/league-page](https://github.com/nmelhado/league-page). Upstream sometimes ships bugfixes and features.
+
+1. On GitHub, use **Sync fork** / fetch upstream if available, or merge from `nmelhado/league-page`.
+2. Check the upstream [CHANGELOG](https://github.com/nmelhado/league-page/blob/master/CHANGELOG.md).
+3. Resolve conflicts carefully in:
+   - `src/lib/utils/leagueInfo.js` (keep Soup Hat managers / IDs / homepage text)
+   - `src/lib/utils/tabs.js`
+   - `src/routes/constitution/+page.svelte`
+   - Branding / theme files
+4. `package-lock.json` conflicts: prefer the incoming lockfile when unsure, then run `npm install` locally and commit.
+
+---
+
+## VIII. Troubleshooting
+
+| Problem | What to check |
+| --- | --- |
+| Site shows old league data | Is `leagueID` the **current** season ID? |
+| Manager missing / wrong team | Does `managerID` match that user in the Sleeper users API? |
+| Broken manager photo | Does `photo` match the filename under `static/managers/` (case-sensitive)? |
+| Blog 404 / empty | `enableBlog`, Contentful models, and all three `VITE_CONTENTFUL_*` env vars? |
+| Nav link missing | Is the tab commented out in `tabs.js`? |
+| Local build fails | Node `>=20`? Run `npm install` then `npm run dev`. |
+
+**Bugs / feature ideas for the template itself:** open an issue on the [original League Page repo](https://github.com/nmelhado/league-page/issues).
+
+**Soup Hat–specific changes:** open a PR or issue on [pmann8/soup-hat-dynasty](https://github.com/pmann8/soup-hat-dynasty).

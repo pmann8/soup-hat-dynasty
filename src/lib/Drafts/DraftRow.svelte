@@ -16,10 +16,11 @@
 
     .draftPos {
         position: absolute;
-        top: 0.3em;
-        left: 0.3em;
+        top: 0.2em;
+        left: 0.25em;
         font-style: italic;
-        color: #bbb; /* Lighter color for better readability */
+        color: var(--mist);
+        font-size: 0.95em;
     }
 
     .draftPosPrev {
@@ -27,15 +28,17 @@
         top: 0.1em;
         left: 0.1em;
         font-style: italic;
-        color: #000; /* Lighter color for better readability */
+        color: #000;
     }
 
     .newOwner {
         font-style: italic;
-        color: #bbb; /* Lighter color for better readability */
+        color: var(--mist);
         text-align: center;
         white-space: break-spaces;
-        line-height: 1.2em;
+        line-height: 1.15em;
+        padding: 1.4em 0.2em 0.2em;
+        font-size: 0.95em;
     }
 
     :global(.prevQB) {

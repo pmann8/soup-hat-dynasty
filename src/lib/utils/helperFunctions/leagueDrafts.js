@@ -52,6 +52,7 @@ export const getUpcomingDraft = async () => {
 		draft,
 		draftOrder,
 		accuracy,
+		draftComplete: officialDraft.status == "complete",
 		draftType: officialDraft.type,
 		reversalRound: officialDraft.settings.reversal_round,
 	}

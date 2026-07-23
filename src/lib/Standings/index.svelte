@@ -24,7 +24,6 @@
     ];
 
     let loading = true;
-    let preseason = false;
     let isAllTime = false;
     let standings, year, leagueTeamManagers;
     let leagueData, totals;
@@ -54,9 +53,8 @@
                 { name: "Lineup IQ", field: "lineupIQ" },
                 { name: "Trades", field: "trades" },
                 { name: "Waivers", field: "waivers" }
-            ];            
+            ];
             loading = false;
-            preseason = true;
             return;
         }
 
@@ -111,11 +109,12 @@
             allTimeStandings[teamId].lineupIQ = round((record.fptsFor / record.potentialPoints) * 100) + '%';
         });
         
-        const leagueTransactionsTotals = records.leagueTransactions.totals.allTime;
+        const leagueTransactionsTotals = records.leagueTransactions?.totals?.allTime ?? {};
 
         Object.entries(leagueTransactionsTotals).forEach(([teamId, record]) => {
-            allTimeStandings[teamId].trades = record.trade;
-            allTimeStandings[teamId].waivers = record.waiver;
+            if (!allTimeStandings[teamId]) return;
+            allTimeStandings[teamId].trades = record.trade ?? 0;
+            allTimeStandings[teamId].waivers = record.waiver ?? 0;
         });
 
         return Object.values(allTimeStandings).sort((a, b) => b.wins - a.wins);
@@ -144,9 +143,14 @@
     }
 
     h1 {
-        font-size: 2.2em;
-        line-height: 1.3em;
-        margin: 1.5em 0 2em;
+        font-family: var(--font-display);
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        margin: 2rem auto 1.5rem;
+        max-width: 1100px;
+        padding: 0 1rem;
+        color: var(--chalk);
     }
 
     .standingsTable::-webkit-scrollbar { 
@@ -154,60 +158,77 @@
     }
 
     .standingsTable {
-        max-width: 100%;
+        max-width: min(1100px, 100%);
         overflow-x: scroll;
-        margin: 0.5em 0 5em;
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;     /* Firefox */
+        margin: 0.5em auto 5em;
+        padding: 0 1rem;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
 
     :global(.standingsTable .mdc-data-table) {
-	    background-color: var(--lightBlue) !important;
-        border: none !important;
+	    background-color: var(--panel) !important;
+        border: 1px solid rgba(232, 228, 217, 0.08) !important;
     }    
 
     :global(.standingsTable .mdc-data-table__header-cell) {
-	    background-color: var(--lightBlue) !important;
+	    background-color: var(--panel) !important;
         text-align: center;
+        color: var(--copper) !important;
+        font-family: var(--font-display) !important;
+        letter-spacing: 0.04em !important;
+        text-transform: uppercase !important;
+        font-size: 0.75rem !important;
     }
 
     :global(.standingsTable .mdc-data-table__cell) {
         text-align: center;
+        color: var(--chalk) !important;
     }
 </style>
 
 <h1>{year ?? ''} {leagueName} Standings</h1>
 
 {#if loading}
-    <!-- promise is pending -->
-    <div class="loading">
-        <p>Loading Standings...</p>
-        <LinearProgress indeterminate />
-    </div>
+	<div class="loading">
+		<p>Loading Standings...</p>
+		<LinearProgress indeterminate />
+	</div>
 {:else}
-    <div class="standingsTable">
-        <DataTable table$aria-label="League Standings" >
-            <Head> <!-- Team name  -->
-                <Row>
-                    <Cell class="center">Team</Cell>
-                    {#each columnOrder as column}
-                        <Cell class="center wrappable">{column.name}</Cell>
-                    {/each}
-                </Row>
-            </Head>
-            <Body>
-                <!-- 	Standing	 -->
-                {#if isAllTime}
-                    {#each aggregateAllTimeStandings(leagueData) as standing}
-                        <Standing {columnOrder} {standing} {leagueTeamManagers} team={getTeamFromTeamManagersAndManagerID(leagueTeamManagers, standing.managerID)} {isAllTime} />
-                    {/each}
-                {:else}
-                    {#each standings as standing}
-                        <Standing {columnOrder} {standing} {leagueTeamManagers} team={getTeamFromTeamManagers(leagueTeamManagers, standing.rosterID)} {isAllTime} />
-                    {/each}
-                {/if}
-            </Body>
-        </DataTable>
-    </div>
+	<div class="standingsTable">
+		<DataTable table$aria-label="League Standings">
+			<Head>
+				<Row>
+					<Cell class="center">Team</Cell>
+					{#each columnOrder as column}
+						<Cell class="center wrappable">{column.name}</Cell>
+					{/each}
+				</Row>
+			</Head>
+			<Body>
+				{#if isAllTime}
+					{#each aggregateAllTimeStandings(leagueData) as standing}
+						<Standing
+							{columnOrder}
+							{standing}
+							{leagueTeamManagers}
+							team={getTeamFromTeamManagersAndManagerID(leagueTeamManagers, standing.managerID)}
+							{isAllTime}
+						/>
+					{/each}
+				{:else}
+					{#each standings as standing}
+						<Standing
+							{columnOrder}
+							{standing}
+							{leagueTeamManagers}
+							team={getTeamFromTeamManagers(leagueTeamManagers, standing.rosterID)}
+							{isAllTime}
+						/>
+					{/each}
+				{/if}
+			</Body>
+		</DataTable>
+	</div>
 {/if}
 
