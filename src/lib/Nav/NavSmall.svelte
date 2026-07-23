@@ -1,6 +1,6 @@
 <script>
 	import { tabs } from '$lib/utils/tabs';
-	import Drawer, { Content, Header, Title } from '@smui/drawer';
+	import Drawer, { Content, Header, Title, Scrim } from '@smui/drawer';
 	import { Icon } from '@smui/tab';
 	import List, { Item, Text, Graphic, Separator, Subheader } from '@smui/list';
 	import { goto, preloadData } from '$app/navigation';
@@ -143,3 +143,4 @@
 		</List>
 	</Content>
 </Drawer>
+<Scrim fixed={true} />
