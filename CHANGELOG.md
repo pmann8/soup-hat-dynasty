@@ -4,6 +4,14 @@ All notable changes to **Soup Hat Dynasty** are documented here.
 
 This site is a fork of [League Page](https://github.com/nmelhado/league-page). Version **3.x** is the Soup Hat Dynasty modernization line (branched from upstream **2.5.1**). Upstream template history is preserved below under [League Page (upstream)](#league-page-upstream).
 
+## [3.0.1](https://github.com/pmann8/soup-hat-dynasty/compare/soup-hat-dynasty-v3.0.0...soup-hat-dynasty-v3.0.1) (2026-07-23)
+
+
+### Fixed
+
+* center champion laurel on awards podium avatar ([5f77906](https://github.com/pmann8/soup-hat-dynasty/commit/5f779060552c84a5b7c36f24ea1c7c62fea01c29))
+* tighten awards podium layout so place names stay visible ([4fcf351](https://github.com/pmann8/soup-hat-dynasty/commit/4fcf351c0238a74121caa62954e1a43d4c35fcc0))
+
 ## [3.0.0] - 2026-07-23
 
 Soup Hat Dynasty modernization release. Major version bump marks this fork’s own release line going forward (`3.x.x`).
