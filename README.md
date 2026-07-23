@@ -76,7 +76,7 @@ Edit copy in [`src/routes/constitution/+page.svelte`](./src/routes/constitution/
 ### Blog (optional)
 
 1. Create a free [Contentful](https://contentful.com/) space.
-2. Add content models `blog_post` and `blog_comment` (see [TRAINING_WHEELS.md](./TRAINING_WHEELS.md#iii-add-a-blog) for field specs).
+2. Add content models `blog_post` and `blog_comment` (see [TRAINING_WHEELS.md](./TRAINING_WHEELS.md#v-add-a-blog) for field specs).
 3. Create Management and Delivery API keys.
 4. Set env vars locally in `.env` and in Vercel project settings:
    - `VITE_CONTENTFUL_ACCESS_TOKEN` — Content Management API token
