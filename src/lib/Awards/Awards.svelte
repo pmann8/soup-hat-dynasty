@@ -98,10 +98,12 @@
 		display: grid;
 		place-items: center;
 		flex-shrink: 0;
+		overflow: visible;
 	}
 
 	.place.first .avatar-wrap {
-		width: 74%;
+		/* Wrap sized to the wreath; avatar sits smaller in the center */
+		width: 100%;
 	}
 
 	.champ {
@@ -116,13 +118,18 @@
 		z-index: 1;
 	}
 
+	.place.first .champ {
+		width: 65%;
+		height: 65%;
+		grid-area: 1 / 1;
+	}
+
 	.laurel {
-		position: absolute;
-		width: 145%;
-		height: auto;
-		left: 50%;
-		top: 52%;
-		transform: translate(-50%, -50%);
+		grid-area: 1 / 1;
+		position: relative;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
 		pointer-events: none;
 		z-index: 2;
 	}
