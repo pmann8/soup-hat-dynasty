@@ -1,8 +1,8 @@
 /*
-!!! DO NOT EDIT !!!
-This is used to check if there are any updates
-available for your copy of League Page
+App version — single source of truth is package.json.
+Bump with: npm run release:patch | release:minor | release:major
 */
 
-// Keep in sync with package.json
-export const version = "3.0.0";
+import pkg from '../../package.json';
+
+export const version = pkg.version;

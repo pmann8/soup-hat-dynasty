@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "release-type": "node",
+  "include-v-in-tag": true,
+  "packages": {
+    ".": {
+      "package-name": "soup-hat-dynasty",
+      "changelog-path": "CHANGELOG.md",
+      "bump-minor-pre-major": false,
+      "bump-patch-for-minor-pre-major": false
+    }
+  },
+  "changelog-sections": [
+    { "type": "feat", "section": "Added" },
+    { "type": "fix", "section": "Fixed" },
+    { "type": "perf", "section": "Fixed" },
+    { "type": "deps", "section": "Changed" },
+    { "type": "chore", "section": "Changed", "hidden": true },
+    { "type": "docs", "section": "Changed", "hidden": true },
+    { "type": "refactor", "section": "Changed", "hidden": true },
+    { "type": "style", "section": "Changed", "hidden": true },
+    { "type": "test", "section": "Changed", "hidden": true },
+    { "type": "ci", "section": "Changed", "hidden": true }
+  ]
+}

@@ -17,10 +17,13 @@ Soup Hat Dynasty modernization release. Major version bump marks this fork’s o
 - Draft preview on the homepage during the offseason
 - Mobile nav drawer scrim and backdrop blur
 - Rewrote [README.md](./README.md) and [TRAINING_WHEELS.md](./TRAINING_WHEELS.md) for this repo (config depth, local/Vercel workflow, season rollover)
+- [release-please](https://github.com/googleapis/release-please) workflow for automated `3.x` version bumps and changelog updates
+- Vercel ignore-build script to skip deploys for docs/meta-only commits
 
 ### Changed
 
 - Version line moved to **3.0.0** (independent of upstream League Page `2.x`)
+- `src/lib/version.js` now reads from `package.json` (single source of truth)
 - Updated `leagueID` for the current Sleeper season
 - App metadata, footer, and navigation styling (Soup Hat look and feel)
 - Major UI overhaul on top of the League Page template
@@ -35,6 +38,10 @@ Soup Hat Dynasty modernization release. Major version bump marks this fork’s o
 - Theme compile / display errors
 - News article fetching / display issues
 - Most-traded-players navigation error when leaving the page
+
+### Removed
+
+- Upstream League Page “update available” footer banner (this fork tracks its own `3.x` line)
 
 ---
 

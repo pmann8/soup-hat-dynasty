@@ -4,8 +4,6 @@
 	import { tabs } from '$lib/utils/tabs';
 	import { onMount } from 'svelte';
 
-	let outOfDate = false;
-
 	let el, footerHeight;
 
 	let innerWidth;
@@ -22,10 +20,7 @@
 		}
 	};
 
-	onMount(async () => {
-		const res = await fetch('/api/checkVersion', { compress: true });
-		const needUpdate = await res.json();
-		outOfDate = needUpdate;
+	onMount(() => {
 		resize(el?.getBoundingClientRect(), true);
 	});
 
@@ -131,19 +126,10 @@
 <div class="footerSpacer" style="height: {footerHeight}px;"></div>
 
 <footer bind:this={el}>
-	{#if outOfDate}
-		<p class="updateNotice">
-			There is an update available for your League Page.
-			<a href="https://github.com/nmelhado/league-page/blob/master/TRAINING_WHEELS.md#iv-updates"
-				>Follow the Update Instructions</a
-			>
-			to get all of the newest features!
-		</p>
-	{/if}
 	{#if managersOutOfDate}
 		<p class="updateNotice">
 			Your managers page needs an update,
-			<a href="https://github.com/nmelhado/league-page/blob/master/TRAINING_WHEELS.md#2-add-managers"
+			<a href="https://github.com/pmann8/soup-hat-dynasty/blob/souphat/TRAINING_WHEELS.md#iv-managers"
 				>please follow the instructions</a
 			>
 			to get the most up-to-date experience.
@@ -171,7 +157,7 @@
 	</div>
 	<div class="meta">
 		<span class="copyright"
-			>&copy; 2021 - {year} <a href="https://github.com/pmann8/league-page">League Page</a></span
+			>&copy; 2021 - {year} <a href="https://github.com/pmann8/soup-hat-dynasty">Soup Hat Dynasty</a></span
 		>
 		<br />
 		<span class="creator">Built by <a href="http://www.nmelhado.com/">Nicholas Melhado</a></span>

@@ -6,6 +6,35 @@ Custom league site for the **Soup Hat Dynasty** Sleeper fantasy football league.
 
 Built on the [League Page](https://github.com/nmelhado/league-page) template (SvelteKit + Sleeper API). Current release: **3.0.0**.
 
+## Versioning
+
+`package.json` is the single source of truth. `src/lib/version.js` reads from it automatically.
+
+### Automatic (preferred) — release-please
+
+Releases are managed by [release-please](https://github.com/googleapis/release-please) on pushes to `master` or `souphat`.
+
+1. Commit with [Conventional Commits](https://www.conventionalcommits.org/):
+   - `feat:` → minor (e.g. 3.0.0 → 3.1.0)
+   - `fix:` → patch (e.g. 3.0.0 → 3.0.1)
+   - `feat!:` / `BREAKING CHANGE:` → major (e.g. 3.0.0 → 4.0.0)
+2. Push to `souphat` or `master`.
+3. release-please opens/updates a **Release PR** that bumps `package.json`, updates `CHANGELOG.md`, and refreshes `.release-please-manifest.json`.
+4. Merge that Release PR → GitHub Release + `vX.Y.Z` tag are created.
+
+Config: [`release-please-config.json`](./release-please-config.json), [`.release-please-manifest.json`](./.release-please-manifest.json), workflow: [`.github/workflows/release-please.yml`](./.github/workflows/release-please.yml).
+
+### Manual fallback
+
+```bash
+npm run release:patch   # 3.0.0 → 3.0.1
+npm run release:minor   # 3.0.0 → 3.1.0
+npm run release:major   # 3.0.0 → 4.0.0
+git push --follow-tags
+```
+
+If you bump manually, also update `.release-please-manifest.json` so release-please stays in sync.
+
 ## Features
 
 - Live standings, matchups, and power rankings
