@@ -10,26 +10,26 @@
 <style>
     .awards {
         display: block;
-        margin: 30px auto;
+        margin: 1rem auto 2rem;
 		width: 95%;
-		max-width: 1000px;
+		max-width: 900px;
 		position: relative;
 		z-index: 1;
-		overflow-y: hidden;
+		overflow: visible;
     }
 
 	.loading {
 		display: block;
 		width: 85%;
 		max-width: 500px;
-		margin: 80px auto;
+		margin: 2.5rem auto;
 	}
 
 	.nothingYet {
 		display: block;
 		width: 85%;
 		max-width: 500px;
-		margin: 80px auto;
+		margin: 2.5rem auto;
 		text-align: center;
 	}
 </style>
