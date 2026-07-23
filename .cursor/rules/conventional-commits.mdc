@@ -1,0 +1,54 @@
+---
+description: Require Conventional Commits for release-please version bumps
+alwaysApply: true
+---
+
+# Conventional Commits
+
+This repo uses [release-please](https://github.com/googleapis/release-please). Every commit message MUST follow [Conventional Commits](https://www.conventionalcommits.org/).
+
+## Format
+
+```
+<type>(optional-scope): <short description>
+```
+
+## Types (match release-please-config.json)
+
+| Type | When to use | Version bump |
+|------|-------------|--------------|
+| `feat` | New user-facing capability | minor |
+| `fix` | Bug fix | patch |
+| `perf` | Performance improvement | patch |
+| `deps` | Dependency updates | patch (Changed) |
+| `chore` | Tooling, config, non-user-facing | none (hidden) |
+| `docs` | Documentation only | none (hidden) |
+| `refactor` | Code change with no behavior change | none (hidden) |
+| `style` | Formatting only | none (hidden) |
+| `test` | Tests only | none (hidden) |
+| `ci` | CI/workflow only | none (hidden) |
+
+Breaking changes: `feat!:` / `fix!:` or a `BREAKING CHANGE:` footer → major bump.
+
+## Rules
+
+- Subject is imperative, lowercase after the type, no trailing period
+- Prefer `feat` / `fix` for anything that should appear in the changelog / bump the version
+- Use `chore` for release-please config, assets cleanup, and other non-user-facing work
+- Never write free-form subjects like `Update standings` or `minor fixes`
+
+## Examples
+
+```
+feat: add division 3 banner to standings
+fix: restore PNG alpha transparency on award icons
+chore: sync release-please manifest to 3.0.1
+docs: clarify conventional commit usage in README
+```
+
+```
+# ❌ BAD — release-please ignores these
+Update standings table
+fix league standings
+minor updates
+```
