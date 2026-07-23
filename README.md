@@ -4,7 +4,7 @@ Custom league site for the **Soup Hat Dynasty** Sleeper fantasy football league.
 
 **Live site:** [soup-hat-dynasty.vercel.app](https://soup-hat-dynasty.vercel.app/)
 
-Built on the [League Page](https://github.com/nmelhado/league-page) template (SvelteKit + Sleeper API).
+Built on the [League Page](https://github.com/nmelhado/league-page) template (SvelteKit + Sleeper API). Current release: **3.0.0**.
 
 ## Features
 
@@ -116,6 +116,20 @@ npm run docker-run
 ## Deploy
 
 Push to GitHub; Vercel builds and deploys automatically when linked to this repo. Add any Contentful env vars in the Vercel project settings if the blog is enabled.
+
+### Skip builds for docs-only commits
+
+Use Vercel’s **Ignored Build Step** so pushes that only change Markdown / meta files do not redeploy:
+
+1. Open [Project → Settings → Build and Deployment](https://vercel.com/pmann8/soup-hat-dynasty/settings/deployment)
+2. Under **Ignored Build Step**, choose **Custom** (or “Run my Bash script”)
+3. Set the command to:
+
+```bash
+bash scripts/vercel-ignore-build.sh
+```
+
+Exit codes: `0` = skip build, `1` = build. The script ignores changes limited to `*.md` / `*.mdx` / `*.txt`, `.github/`, `LICENSE`, and a few editor config files. Edit [`scripts/vercel-ignore-build.sh`](./scripts/vercel-ignore-build.sh) to adjust that list.
 
 ## Credits
 
