@@ -45,18 +45,20 @@
 		height: auto;
 		transform: translate(-50%, -50%);
 		border-radius: 100%;
-		border: 1px solid var(--bbb);
-		background-color: var(--fff);
+		border: 1px solid var(--copper);
+		background-color: var(--panel);
+		z-index: 5;
 	}
 
 	.laurel {
 		position: absolute;
-		width: 33%;
+		width: 31%;
 		height: auto;
 		transform: translate(-50%, -50%);
-		bottom: 56.6%;
+		bottom: 63%;
 		left: 50%;
 		pointer-events: none;
+		z-index: 6;
 	}
 
 	.first {
@@ -65,12 +67,12 @@
 	}
 
 	.second {
-		bottom: 43%;
+		bottom: 54%;
 		left: 20%;
 	}
 
 	.third {
-		bottom: 39%;
+		bottom: 50%;
 		left: 80%;
 	}
 
@@ -154,6 +156,7 @@
 		padding: 6px 6px;
 		background-color: var(--lightBlue);
 		border-radius: 5px;
+		z-index: 7;
 	}
 
 	.firstLabel {
@@ -251,12 +254,20 @@
 			bottom: 58%;
 		}
 
+		.second {
+			bottom: 52%;
+		}
+
+		.third {
+			bottom: 48%;
+		}
+
 		.secondLabel {
-			bottom: 35%;
+			bottom: 36%;
 		}
 
 		.thirdLabel {
-			bottom: 31%;
+			bottom: 32%;
 		}
 	}
 
@@ -306,12 +317,20 @@
 			bottom: 53%;
 		}
 
+		.second {
+			bottom: 50%;
+		}
+
+		.third {
+			bottom: 46%;
+		}
+
 		.secondLabel {
-			bottom: 31%;
+			bottom: 32%;
 		}
 
 		.thirdLabel {
-			bottom: 27%;
+			bottom: 28%;
 		}
 	}
 

@@ -267,6 +267,9 @@
 		border: 2px solid var(--copper);
 		left: 50%;
 		top: 43%;
+		z-index: 2;
+		object-fit: cover;
+		background: var(--panel);
 	}
 
 	.laurel {
@@ -276,7 +279,8 @@
 		height: auto;
 		left: 50%;
 		top: 50%;
-		filter: sepia(0.35) saturate(1.2);
+		z-index: 3;
+		pointer-events: none;
 	}
 
 	h4 {
