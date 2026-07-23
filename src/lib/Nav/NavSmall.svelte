@@ -9,10 +9,14 @@
 	import { enableBlog, managers } from '$lib/utils/leagueInfo';
 
 	let active = $derived(page.url.pathname);
-	let open = false;
+	let open = $state(false);
 
 	const selectTab = (tab) => {
 		open = false;
+		if (tab.dest?.startsWith('http')) {
+			window.open(tab.dest, '_blank');
+			return;
+		}
 		goto(tab.dest);
 	};
 </script>
@@ -33,11 +37,15 @@
 	}
 
 	:global(.nav-drawer) {
-		z-index: 30;
+		z-index: 120 !important;
 		top: 0;
 		left: 0;
 		background: var(--panel) !important;
 		border-right: 1px solid rgba(232, 228, 217, 0.1) !important;
+	}
+
+	:global(.mdc-drawer-scrim) {
+		z-index: 110 !important;
 	}
 
 	:global(.nav-drawer .mdc-drawer__title) {
@@ -74,19 +82,9 @@
 		text-transform: uppercase !important;
 		font-size: 0.7rem !important;
 	}
-
-	.nav-back {
-		position: fixed;
-		z-index: 25;
-		inset: 0;
-		background-color: rgba(12, 18, 16, 0.55);
-		transition: opacity 0.3s ease;
-	}
 </style>
 
 <Icon class="material-icons menuIcon" onclick={() => (open = true)} ripple={false} touch={true}>menu</Icon>
-
-<div class="nav-back" role="button" tabindex="0" style="pointer-events: {open ? 'visible' : 'none'}; opacity: {open ? 1 : 0};" onclick={() => open = false} onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') open = false; }}></div>
 
 <Drawer variant="modal" class="nav-drawer" fixed={true} bind:open>
 	<Header>
@@ -96,7 +94,12 @@
 		<List>
 			{#each tabs as tab}
 				{#if !tab.nest && (tab.label != 'Blog' || (tab.label == 'Blog' && enableBlog))}
-					<Item href="javascript:void(0)" onSMUIAction={() => selectTab(tab)} ontouchstart={() => preloadData(tab.dest)} onmouseover={() => preloadData(tab.dest)} activated={active == tab.dest}>
+					<Item
+						onSMUIAction={() => selectTab(tab)}
+						ontouchstart={() => preloadData(tab.dest)}
+						onmouseover={() => preloadData(tab.dest)}
+						activated={active == tab.dest}
+					>
 						<Graphic class="material-icons{active == tab.dest ? '' : ' nav-item'}" aria-hidden="true">{tab.icon}</Graphic>
 						<Text class="{active == tab.dest ? '' : 'nav-item'}">{tab.label}</Text>
 					</Item>
@@ -109,13 +112,27 @@
 					{#each tab.children as subTab}
 						{#if subTab.label == 'Managers'}
 							{#if managers.length}
-								<Item href="javascript:void(0)" onSMUIAction={() => selectTab(subTab)} activated={active == subTab.dest} ontouchstart={() => preloadData(subTab.dest)} onmouseover={() => preloadData(subTab.dest)}>
+								<Item
+									onSMUIAction={() => selectTab(subTab)}
+									activated={active == subTab.dest}
+									ontouchstart={() => preloadData(subTab.dest)}
+									onmouseover={() => preloadData(subTab.dest)}
+								>
 									<Graphic class="material-icons{active == subTab.dest ? '' : ' nav-item'}" aria-hidden="true">{subTab.icon}</Graphic>
 									<Text class="{active == subTab.dest ? '' : 'nav-item'}">{subTab.label}</Text>
 								</Item>
 							{/if}
 						{:else}
-							<Item href="javascript:void(0)" onSMUIAction={() => selectTab(subTab)} activated={active == subTab.dest} ontouchstart={() => {if(subTab.label != 'Go to Sleeper') preloadData(subTab.dest)}} onmouseover={() => {if(subTab.label != 'Go to Sleeper') preloadData(subTab.dest)}}>
+							<Item
+								onSMUIAction={() => selectTab(subTab)}
+								activated={active == subTab.dest}
+								ontouchstart={() => {
+									if (subTab.label != 'Go to Sleeper') preloadData(subTab.dest);
+								}}
+								onmouseover={() => {
+									if (subTab.label != 'Go to Sleeper') preloadData(subTab.dest);
+								}}
+							>
 								<Graphic class="material-icons{active == subTab.dest ? '' : ' nav-item'}" aria-hidden="true">{subTab.icon}</Graphic>
 								<Text class="{active == subTab.dest ? '' : 'nav-item'}">{subTab.label}</Text>
 							</Item>

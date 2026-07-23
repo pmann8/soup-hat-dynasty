@@ -35,11 +35,21 @@
 		align-items: center;
 		gap: 1rem;
 		padding: 0.65rem 1.25rem;
+		background: transparent;
+		border-bottom: 1px solid rgba(232, 228, 217, 0.08);
+		overflow: visible;
+	}
+
+	/* Keep blur on a pseudo so position:fixed drawer/menu aren't trapped */
+	nav::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;
 		background: rgba(12, 18, 16, 0.82);
 		backdrop-filter: blur(14px);
 		-webkit-backdrop-filter: blur(14px);
-		border-bottom: 1px solid rgba(232, 228, 217, 0.08);
-		overflow: visible;
+		pointer-events: none;
 	}
 
 	.brand {
